@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>دليل شبين الكوم الطبي — ابحث عن أفضل طبيب</title>
+  <meta name="description" content="دليل شبين الكوم الطبي: أكبر دليل طبي موثوق في المنوفية. ابحث عن أطباء، مستشفيات، معامل، صيدليات ومراكز أشعة في شبين الكوم.">
+  <link rel="canonical" href="./index.html">
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body class="smg-body smg-homepage">
+
+  <!-- ========== Header ========== -->
+  <header class="smg-header">
+    <div class="smg-container smg-header-inner">
+      <a class="smg-brand" href="./index.html">
+        <span class="smg-brand-text">دليل شبين الكوم الطبي</span>
+      </a>
+      <nav class="smg-nav" id="smgNav" aria-label="التنقل الرئيسي">
+        <a href="./index.html" class="active">الرئيسية</a>
+        <a href="./specialties.html">التخصصات</a>
+        <a href="./about.html">من نحن</a>
+        <a href="./privacy.html">سياسة الخصوصية</a>
+        <a href="./disclaimer.html">إخلاء المسؤولية</a>
+        <a href="./contact.html">اتصل بنا</a>
+      </nav>
+      <a class="smg-btn-add" href="./add-doctor.html">
+        <span class="material-icons-round">add_circle</span> أضف طبيب
+      </a>
+      <button aria-label="القائمة" class="smg-mobile-menu-btn" id="smgMenuBtn" type="button">
+        <span class="material-icons-round">menu</span>
+      </button>
+    </div>
+  </header>
+  <div class="smg-mobile-overlay" id="smgMenuOverlay"></div>
+
+  <!-- ========== Hero ========== -->
+  <div id="smg-home">
+    <header class="smg-hero">
+      <div class="smg-hero-bg"></div>
+      <div class="smg-hero-overlay"></div>
+      <div class="smg-hero-content">
+        <span class="smg-hero-badge">دليلك الطبي الموثوق في المنوفية</span>
+        <h1>ابحث عن <span class="highlight">طبيب</span> أو مستشفى أو صيدلية في شبين الكوم</h1>
+        <p class="smg-hero-desc">احجز موعدك بسهولة — اعثر على أطباء ومستشفيات ومعامل وصيدليات ومراكز أشعة وخدمات طوارئ.</p>
+        <form class="smg-search-bar" role="search" id="heroSearchForm">
+          <input aria-label="بحث" name="q" placeholder="اسم الطبيب، المستشفى، الصيدلية..." type="text" id="heroSearchInput">
+          <select aria-label="اختر الفئة أو التخصص" id="heroSpecialtySelect">
+            <option value="">الكل (أطباء وخدمات)</option>
+          </select>
+          <button class="smg-search-btn" type="submit">
+            بحث <span class="material-icons-round" style="font-size:18px">arrow_back</span>
+          </button>
+        </form>
+      </div>
+    </header>
+
+    <!-- ========== Service Categories ========== -->
+    <section class="smg-services-wrap" aria-label="الخدمات الطبية">
+      <div class="smg-container">
+        <div class="smg-services-grid">
+          <a class="smg-service-card" href="./doctors.html">
+            <div class="smg-service-icon"><span class="material-icons-round">person_search</span></div>
+            <h3>الأطباء</h3>
+            <p>عيادات خاصة</p>
+          </a>
+          <a class="smg-service-card" href="./listing.html?category=hospitals">
+            <div class="smg-service-icon"><span class="material-icons-round">local_hospital</span></div>
+            <h3>المستشفيات</h3>
+            <p>حكومي وخاص</p>
+          </a>
+          <a class="smg-service-card" href="./listing.html?category=labs">
+            <div class="smg-service-icon"><span class="material-icons-round">biotech</span></div>
+            <h3>معامل وتحاليل</h3>
+            <p>نتائج دقيقة</p>
+          </a>
+          <a class="smg-service-card" href="./listing.html?category=radiology">
+            <div class="smg-service-icon"><span class="material-icons-round">monitor_heart</span></div>
+            <h3>مراكز أشعة</h3>
+            <p>سونار ورنين</p>
+          </a>
+          <a class="smg-service-card" href="./listing.html?category=pharmacies">
+            <div class="smg-service-icon"><span class="material-icons-round">local_pharmacy</span></div>
+            <h3>الصيدليات</h3>
+            <p>خدمة 24 ساعة</p>
+          </a>
+          <a class="smg-service-card smg-emergency" href="./listing.html?category=emergency">
+            <div class="smg-service-icon"><span class="material-icons-round">emergency</span></div>
+            <h3>طوارئ</h3>
+            <p>إسعاف فوري</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== CTA Block ========== -->
+    <section class="smg-cta-block">
+      <div class="smg-container">
+        <div style="display:flex;justify-content:center;margin-bottom:16px">
+          <div style="width:72px;height:72px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,0.35)">
+            <span class="material-icons-round" style="font-size:38px;color:#fff">verified_user</span>
+          </div>
+        </div>
+        <h2>هل أنت طبيب أو صاحب منشأة طبية؟</h2>
+        <p>انضم إلى أكبر دليل طبي في شبين الكوم وساعد آلاف المرضى في الوصول إليك بسهولة.</p>
+        <a class="smg-btn-add" href="./add-doctor.html">
+          <span class="material-icons-round">add_circle</span> أضف طبيب أو منشأة
+        </a>
+      </div>
+    </section>
+  </div>
+
+  <!-- ========== Alert Bar ========== -->
+  <div class="smg-alert-bar" role="alert">
+    <span class="material-icons-round">warning</span>
+    <span>تنبيه هام: المواعيد قابلة للتغيير، اتصل قبل الزيارة</span>
+  </div>
+
+  <!-- ========== Footer ========== -->
+  <footer class="smg-footer">
+    <div class="smg-container">
+      <div class="smg-footer-grid">
+        <div>
+          <div class="smg-footer-brand">
+            <span class="material-icons-round smg-footer-brand-ico">medical_services</span>
+            <span class="smg-footer-brand-text">دليل شبين الكوم الطبي</span>
+          </div>
+          <p class="smg-footer-desc">
+            <strong>منصتك الأولى للوصول إلى أفضل خدمات الرعاية الصحية</strong> في مدينة شبين الكوم.
+            <br>
+            نسعى لتسهيل حياة المرضى وربطهم بمقدمي الخدمة الطبية المتميزين.
+          </p>
+          <div class="smg-footer-social">
+            <a aria-label="فيسبوك" href="#"><span class="material-icons-round">facebook</span></a>
+            <a aria-label="بريد" href="#"><span class="material-icons-round">alternate_email</span></a>
+            <a aria-label="اتصال" href="tel:"><span class="material-icons-round">call</span></a>
+          </div>
+        </div>
+        <div>
+          <h4>روابط سريعة</h4>
+          <ul>
+            <li><a href="./index.html">الرئيسية</a></li>
+            <li><a href="./about.html">من نحن</a></li>
+            <li><a href="./contact.html">اتصل بنا</a></li>
+            <li><a href="./privacy.html">سياسة الخصوصية</a></li>
+            <li><a href="./disclaimer.html">إخلاء المسؤولية</a></li>
+            <li><a href="./add-doctor.html">أضف طبيب</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>أهم التخصصات</h4>
+          <ul>
+            <li><a href="./doctors.html?specialty=باطنة">الباطنة</a></li>
+            <li><a href="./doctors.html?specialty=أسنان">طب وجراحة الأسنان</a></li>
+            <li><a href="./doctors.html?specialty=نساء وتوليد">النساء والتوليد</a></li>
+            <li><a href="./doctors.html?specialty=أطفال">الأطفال وحديثي الولادة</a></li>
+            <li><a href="./doctors.html?specialty=عظام">العظام والمفاصل</a></li>
+            <li><a href="./doctors.html?specialty=جلدية">الجلدية والتجميل</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>تواصل معنا</h4>
+          <ul>
+            <li><a href="mailto:info@shibin-med.com"><span class="material-icons-round" style="vertical-align:middle">email</span> info@shibin-med.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="smg-footer-copy">© 2026 دليل شبين الكوم الطبي. جميع الحقوق محفوظة.</div>
+    </div>
+  </footer>
+
+  <script src="./app.js"></script>
+  <script>
+    // Populate hero search dropdown (doctors + other categories)
+    SMG.populateSearchDropdown('heroSpecialtySelect');
+
+    // Hero search form handler
+    document.getElementById('heroSearchForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var q = document.getElementById('heroSearchInput').value.trim();
+      var val = document.getElementById('heroSpecialtySelect').value;
+      SMG.handleHeroSearch(q, val);
+    });
+  </script>
+</body>
+</html>

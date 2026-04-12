@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title id="pageTitle">صفحة الطبيب — دليل شبين الكوم الطبي</title>
+  <meta name="description" id="pageDesc" content="تفاصيل الطبيب ومعلومات الحجز والتواصل — دليل شبين الكوم الطبي.">
+  <link rel="canonical" href="./doctor.html">
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <script type="application/ld+json" id="schemaOrg">{}</script>
+</head>
+<body class="smg-body smg-item">
+
+  <!-- Header -->
+  <header class="smg-header">
+    <div class="smg-container smg-header-inner">
+      <a class="smg-brand" href="./index.html"><span class="smg-brand-text">دليل شبين الكوم الطبي</span></a>
+      <nav class="smg-nav" id="smgNav" aria-label="التنقل الرئيسي">
+        <a href="./index.html">الرئيسية</a>
+        <a href="./specialties.html">التخصصات</a>
+        <a href="./about.html">من نحن</a>
+        <a href="./privacy.html">سياسة الخصوصية</a>
+        <a href="./disclaimer.html">إخلاء المسؤولية</a>
+        <a href="./contact.html">اتصل بنا</a>
+      </nav>
+      <a class="smg-btn-add" href="./add-doctor.html"><span class="material-icons-round">add_circle</span> أضف طبيب</a>
+      <button aria-label="القائمة" class="smg-mobile-menu-btn" id="smgMenuBtn" type="button"><span class="material-icons-round">menu</span></button>
+    </div>
+  </header>
+  <div class="smg-mobile-overlay" id="smgMenuOverlay"></div>
+
+  <!-- Doctor Profile v2 -->
+  <div class="smg-dp2-wrap" id="smgDoctorPost">
+    <div class="smg-container">
+
+      <!-- Breadcrumb -->
+      <nav aria-label="مسار" class="smg-breadcrumb">
+        <a href="./index.html"><span class="material-icons-round" style="font-size:18px">home</span> الرئيسية</a>
+        <span class="material-icons-round" style="font-size:14px;color:#cbd5e1">chevron_left</span>
+        <a href="./doctors.html">الأطباء</a>
+        <span class="material-icons-round" style="font-size:14px;color:#cbd5e1">chevron_left</span>
+        <span id="breadcrumbName" style="font-weight:600;color:#1e293b">جارٍ التحميل...</span>
+      </nav>
+
+      <div class="smg-dp2-main">
+
+        <!-- 1. Profile hero -->
+        <div class="smg-dp2-hero">
+          <div class="smg-dp2-hero-inner">
+            <div class="smg-dp2-avatar" id="doctorAvatar">
+              <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:#e0f2fe;color:#008080;font-size:2.4rem;font-weight:800;border-radius:50%">د</div>
+            </div>
+            <div class="smg-dp2-meta">
+              <h1 id="doctorName">جارٍ التحميل...</h1>
+              <p class="smg-dp2-subtitle" id="doctorSubtitle"></p>
+              <div class="smg-dp2-tags" id="doctorTags"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Booking card -->
+        <div class="smg-dp2-booking">
+          <div class="smg-dp2-booking-header">
+            <div class="smg-dp2-card-ico green">
+              <span class="material-icons-round">bookmark_added</span>
+            </div>
+            <h3>للحجز والاستفسار</h3>
+          </div>
+          <!--
+            Mobile order: phones FIRST (order:1), action buttons SECOND (order:2).
+            This is enforced both by DOM order and by explicit CSS order values in style.css.
+          -->
+          <div class="smg-dp2-booking-body">
+            <!-- Phone rows — always rendered first / above action buttons on mobile -->
+            <div class="smg-dp2-phones-col" id="doctorPhones">
+              <div class="smg-loading">جارٍ التحميل...</div>
+            </div>
+            <!-- Action buttons -->
+            <div class="smg-dp2-actions-col">
+              <a class="smg-dp2-btn-call" href="tel:0" id="doctorCallBtn">
+                <span class="material-icons-round" style="font-size:22px">call</span>
+                <span>اتصال</span>
+              </a>
+              <button class="smg-dp2-btn-copy" id="copyLinkBtn" type="button">
+                <span class="material-icons-round" style="font-size:20px">content_copy</span>
+                <span>نسخ الرابط</span>
+              </button>
+              <button class="smg-dp2-btn-share" id="shareBtn" type="button">
+                <span class="material-icons-round" style="font-size:20px">share</span>
+                <span>مشاركة</span>
+              </button>
+              <!-- Share fallback links -->
+              <div class="smg-dp2-share-fallback" id="shareFallback">
+                <div class="smg-dp2-share-links">
+                  <a class="smg-dp2-share-ico" href="#" id="shareWA" rel="noopener" target="_blank" title="واتساب"><span class="material-icons-round">chat</span></a>
+                  <a class="smg-dp2-share-ico" href="#" id="shareFB" rel="noopener" target="_blank" title="فيسبوك"><span class="material-icons-round">facebook</span></a>
+                  <a class="smg-dp2-share-ico" href="#" id="shareMsg" rel="noopener" target="_blank" title="ماسنجر"><span class="material-icons-round">send</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Address -->
+        <div class="smg-dp2-card" id="addressCard">
+          <div class="smg-dp2-card-header">
+            <div class="smg-dp2-card-ico red">
+              <span class="material-icons-round">location_on</span>
+            </div>
+            <h3>العنوان</h3>
+          </div>
+          <p class="smg-dp2-card-body" id="addressText">جارٍ التحميل...</p>
+        </div>
+
+        <!-- 4. Specialty / Services -->
+        <div class="smg-dp2-card" id="servicesCard">
+          <div class="smg-dp2-card-header">
+            <div class="smg-dp2-card-ico blue">
+              <span class="material-icons-round">medical_services</span>
+            </div>
+            <h3>التخصص والخدمات</h3>
+          </div>
+          <p class="smg-dp2-card-body" id="doctorServices"></p>
+        </div>
+
+        <!-- 5. Hours -->
+        <div class="smg-dp2-card" id="hoursCard">
+          <div class="smg-dp2-card-header">
+            <div class="smg-dp2-card-ico amber">
+              <span class="material-icons-round">schedule</span>
+            </div>
+            <h3>مواعيد العمل</h3>
+          </div>
+          <p class="smg-dp2-card-body" id="doctorHours">يُرجى التواصل هاتفياً للتأكد من المواعيد قبل التوجه للعيادة.</p>
+          <p class="smg-dp2-hours-disclaimer">
+            <span class="material-icons-round">info</span>
+            المواعيد قابلة للتغيير — يُنصح بالاتصال قبل الزيارة
+          </p>
+        </div>
+
+      </div><!-- /smg-dp2-main -->
+    </div><!-- /container -->
+  </div>
+
+  <!-- Alert Bar -->
+  <div class="smg-alert-bar" role="alert">
+    <span class="material-icons-round">warning</span>
+    <span>تنبيه هام: المواعيد قابلة للتغيير، اتصل قبل الزيارة</span>
+  </div>
+
+  <!-- Footer -->
+  <footer class="smg-footer">
+    <div class="smg-container">
+      <div class="smg-footer-grid">
+        <div>
+          <div class="smg-footer-brand"><span class="material-icons-round smg-footer-brand-ico">medical_services</span><span class="smg-footer-brand-text">دليل شبين الكوم الطبي</span></div>
+          <p class="smg-footer-desc"><strong>منصتك الأولى للوصول إلى أفضل خدمات الرعاية الصحية</strong> في مدينة شبين الكوم.<br>نسعى لتسهيل حياة المرضى وربطهم بمقدمي الخدمة الطبية المتميزين.</p>
+          <div class="smg-footer-social">
+            <a aria-label="فيسبوك" href="#"><span class="material-icons-round">facebook</span></a>
+            <a aria-label="بريد" href="#"><span class="material-icons-round">alternate_email</span></a>
+            <a aria-label="اتصال" href="tel:"><span class="material-icons-round">call</span></a>
+          </div>
+        </div>
+        <div>
+          <h4>روابط سريعة</h4>
+          <ul>
+            <li><a href="./index.html">الرئيسية</a></li>
+            <li><a href="./about.html">من نحن</a></li>
+            <li><a href="./contact.html">اتصل بنا</a></li>
+            <li><a href="./privacy.html">سياسة الخصوصية</a></li>
+            <li><a href="./disclaimer.html">إخلاء المسؤولية</a></li>
+            <li><a href="./add-doctor.html">أضف طبيب</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>أهم التخصصات</h4>
+          <ul>
+            <li><a href="./doctors.html?specialty=باطنة">الباطنة</a></li>
+            <li><a href="./doctors.html?specialty=أسنان">طب وجراحة الأسنان</a></li>
+            <li><a href="./doctors.html?specialty=نساء وتوليد">النساء والتوليد</a></li>
+            <li><a href="./doctors.html?specialty=أطفال">الأطفال وحديثي الولادة</a></li>
+            <li><a href="./doctors.html?specialty=عظام">العظام والمفاصل</a></li>
+            <li><a href="./doctors.html?specialty=جلدية">الجلدية والتجميل</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>تواصل معنا</h4>
+          <ul>
+            <li><a href="mailto:info@shibin-med.com"><span class="material-icons-round" style="vertical-align:middle">email</span> info@shibin-med.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="smg-footer-copy">© 2026 دليل شبين الكوم الطبي. جميع الحقوق محفوظة.</div>
+    </div>
+  </footer>
+
+  <script src="./app.js"></script>
+  <script>
+    var params = new URLSearchParams(window.location.search);
+    var doctorId = params.get('id') || params.get('slug');
+    if (doctorId) {
+      SMG.renderDoctorProfile(doctorId);
+    } else {
+      document.getElementById('doctorName').textContent = 'لم يتم تحديد طبيب';
+      document.getElementById('breadcrumbName').textContent = 'غير موجود';
+      document.getElementById('doctorPhones').innerHTML = '';
+    }
+  </script>
+</body>
+</html>

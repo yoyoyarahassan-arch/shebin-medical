@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>التخصصات الطبية — دليل شبين الكوم الطبي</title>
+  <meta name="description" content="اعثر على أفضل الأطباء في شبين الكوم. تصفح قائمة الأطباء حسب التخصص والمنطقة واحجز موعدك بسهولة.">
+  <link rel="canonical" href="./doctors.html">
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body class="smg-body">
+
+  <!-- Header -->
+  <header class="smg-header">
+    <div class="smg-container smg-header-inner">
+      <a class="smg-brand" href="./index.html"><span class="smg-brand-text">دليل شبين الكوم الطبي</span></a>
+      <nav class="smg-nav" id="smgNav" aria-label="التنقل الرئيسي">
+        <a href="./index.html">الرئيسية</a>
+        <a href="./specialties.html" class="active">التخصصات</a>
+        <a href="./about.html">من نحن</a>
+        <a href="./privacy.html">سياسة الخصوصية</a>
+        <a href="./disclaimer.html">إخلاء المسؤولية</a>
+        <a href="./contact.html">اتصل بنا</a>
+      </nav>
+      <a class="smg-btn-add" href="./add-doctor.html"><span class="material-icons-round">add_circle</span> أضف طبيب</a>
+      <button aria-label="القائمة" class="smg-mobile-menu-btn" id="smgMenuBtn" type="button"><span class="material-icons-round">menu</span></button>
+    </div>
+  </header>
+  <div class="smg-mobile-overlay" id="smgMenuOverlay"></div>
+
+  <!-- STATE 1: Specialties landing (no filters) -->
+  <div id="modeSpecialties" style="display:none">
+    <div class="smg-docs-spec-header">
+      <div class="smg-container">
+        <h1>اختر تخصصك الطبي</h1>
+        <p>تصفح جميع التخصصات الطبية المتاحة في شبين الكوم واعثر على أفضل الأطباء</p>
+      </div>
+    </div>
+    <div class="smg-spec-stats-bar">
+      <div class="smg-container">
+        <div class="smg-spec-stats">
+          <div class="stat-item"><span class="material-icons-round">medical_services</span><div class="stat-content"><strong>28+</strong><span>تخصص طبي</span></div></div>
+          <div class="stat-item"><span class="material-icons-round">verified</span><div class="stat-content"><strong>أطباء</strong><span>متخصصون ومعتمدون</span></div></div>
+          <div class="stat-item"><span class="material-icons-round">location_on</span><div class="stat-content"><strong>شبين الكوم</strong><span>وجميع القرى المحيطة</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="smg-container">
+      <div class="smg-spec-page-grid" id="doctorsSpecGrid"></div>
+    </div>
+  </div>
+
+  <!-- STATE 2: Doctor listing with filters -->
+  <div id="modeListing" style="display:none">
+    <div class="smg-doctors-wrap">
+      <div class="smg-container">
+        <div class="smg-doctors-title-wrap">
+          <h1>أطباء شبين الكوم</h1>
+          <p>اعثر على أفضل الأطباء في شبين الكوم، وتعرف على التفاصيل الطبية الكاملة.</p>
+        </div>
+        <div class="smg-doctors-layout">
+          <!-- Sidebar Filters -->
+          <aside class="smg-doctors-sidebar">
+            <div class="smg-filter-card">
+              <h3><span class="material-icons-round">filter_list</span> تصفية النتائج</h3>
+              <a href="./doctors.html" style="font-size:14px;color:var(--brand-teal);margin-bottom:12px;display:block">إعادة ضبط</a>
+              <form id="filterForm">
+                <label for="filterName">بحث بالاسم</label>
+                <input id="filterName" name="q" placeholder="اسم الطبيب..." type="text">
+                <label for="filterSpecialty">التخصص</label>
+                <select id="filterSpecialty" name="specialty">
+                  <option value="">كل التخصصات</option>
+                </select>
+                <label>النوع</label>
+                <div class="radio-group">
+                  <label><input checked name="gender" type="radio" value=""> الكل</label>
+                  <label><input name="gender" type="radio" value="دكتور"> دكتور</label>
+                  <label><input name="gender" type="radio" value="دكتورة"> دكتورة</label>
+                </div>
+                <button type="submit">تطبيق الفلتر</button>
+              </form>
+            </div>
+          </aside>
+          <!-- Doctors Grid -->
+          <div class="smg-doctors-grid" id="doctorGrid">
+            <div class="smg-loading">جارٍ تحميل البيانات...</div>
+          </div>
+        </div>
+        <!-- Pagination -->
+        <nav aria-label="الصفحات" class="smg-pagination" id="pagination"></nav>
+      </div>
+    </div>
+  </div>
+
+  <!-- Alert Bar -->
+  <div class="smg-alert-bar" role="alert">
+    <span class="material-icons-round">warning</span>
+    <span>تنبيه هام: المواعيد قابلة للتغيير، اتصل قبل الزيارة</span>
+  </div>
+
+  <!-- Footer -->
+  <footer class="smg-footer">
+    <div class="smg-container">
+      <div class="smg-footer-grid">
+        <div>
+          <div class="smg-footer-brand"><span class="material-icons-round smg-footer-brand-ico">medical_services</span><span class="smg-footer-brand-text">دليل شبين الكوم الطبي</span></div>
+          <p class="smg-footer-desc"><strong>منصتك الأولى للوصول إلى أفضل خدمات الرعاية الصحية</strong> في مدينة شبين الكوم.<br>نسعى لتسهيل حياة المرضى وربطهم بمقدمي الخدمة الطبية المتميزين.</p>
+          <div class="smg-footer-social">
+            <a aria-label="فيسبوك" href="#"><span class="material-icons-round">facebook</span></a>
+            <a aria-label="بريد" href="#"><span class="material-icons-round">alternate_email</span></a>
+            <a aria-label="اتصال" href="tel:"><span class="material-icons-round">call</span></a>
+          </div>
+        </div>
+        <div>
+          <h4>روابط سريعة</h4>
+          <ul>
+            <li><a href="./index.html">الرئيسية</a></li>
+            <li><a href="./about.html">من نحن</a></li>
+            <li><a href="./contact.html">اتصل بنا</a></li>
+            <li><a href="./privacy.html">سياسة الخصوصية</a></li>
+            <li><a href="./disclaimer.html">إخلاء المسؤولية</a></li>
+            <li><a href="./add-doctor.html">أضف طبيب</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>أهم التخصصات</h4>
+          <ul>
+            <li><a href="./doctors.html?specialty=باطنة">الباطنة</a></li>
+            <li><a href="./doctors.html?specialty=أسنان">طب وجراحة الأسنان</a></li>
+            <li><a href="./doctors.html?specialty=نساء وتوليد">النساء والتوليد</a></li>
+            <li><a href="./doctors.html?specialty=أطفال">الأطفال وحديثي الولادة</a></li>
+            <li><a href="./doctors.html?specialty=عظام">العظام والمفاصل</a></li>
+            <li><a href="./doctors.html?specialty=جلدية">الجلدية والتجميل</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>تواصل معنا</h4>
+          <ul>
+            <li><a href="mailto:info@shibin-med.com"><span class="material-icons-round" style="vertical-align:middle">email</span> info@shibin-med.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="smg-footer-copy">© 2026 دليل شبين الكوم الطبي. جميع الحقوق محفوظة.</div>
+    </div>
+  </footer>
+
+  <script src="./app.js"></script>
+  <script>
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      var hasFilters = params.get('specialty') || params.get('q') || params.get('gender') || params.get('page');
+
+      if (hasFilters) {
+        document.getElementById('modeListing').style.display = '';
+        document.title = 'أطباء شبين الكوم — دليل شبين الكوم الطبي';
+
+        SMG.populateSpecialtyDropdown('filterSpecialty');
+
+        if (params.get('q')) document.getElementById('filterName').value = params.get('q');
+        if (params.get('specialty')) document.getElementById('filterSpecialty').value = params.get('specialty');
+        if (params.get('gender')) {
+          document.querySelectorAll('input[name="gender"]').forEach(function(r) {
+            if (r.value === params.get('gender')) r.checked = true;
+          });
+        }
+
+        var currentPage = parseInt(params.get('page')) || 1;
+        SMG.renderDoctorsGrid('doctorGrid', 'pagination', {
+          q: params.get('q') || '',
+          specialty: params.get('specialty') || '',
+          gender: params.get('gender') || '',
+          page: currentPage
+        });
+
+        document.getElementById('filterForm').addEventListener('submit', function(e) {
+          e.preventDefault();
+          var q = document.getElementById('filterName').value.trim();
+          var s = document.getElementById('filterSpecialty').value;
+          var g = document.querySelector('input[name="gender"]:checked').value;
+          var p = new URLSearchParams();
+          if (q) p.set('q', q);
+          if (s) p.set('specialty', s);
+          if (g) p.set('gender', g);
+          window.location.href = './doctors.html' + (p.toString() ? '?' + p.toString() : '');
+        });
+
+      } else {
+        document.getElementById('modeSpecialties').style.display = '';
+        document.title = 'التخصصات الطبية — دليل شبين الكوم الطبي';
+        SMG.renderSpecialtiesGrid('doctorsSpecGrid');
+      }
+    })();
+  </script>
+</body>
+</html>
