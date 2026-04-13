@@ -149,52 +149,56 @@
     </div>
   </footer>
 
-  <script src="./app.js"></script>
-  <script>
-    (function() {
-      var params = new URLSearchParams(window.location.search);
-      var hasFilters = params.get('specialty') || params.get('q') || params.get('gender') || params.get('page');
+  <script src="./config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="./app.js"></script>
+<script>
+  (function() {
+    var params = new URLSearchParams(window.location.search);
+    var q = params.get('q') || '';
+    var specialty = params.get('specialty') || '';
+    var gender = params.get('gender') || '';
+    var page = parseInt(params.get('page') || '1', 10);
 
-      if (hasFilters) {
-        document.getElementById('modeListing').style.display = '';
-        document.title = 'أطباء شبين الكوم — دليل شبين الكوم الطبي';
+    if (q || specialty || gender) {
+      document.getElementById('modeSpecialties').style.display = 'none';
+      document.getElementById('modeListing').style.display = '';
 
-        SMG.populateSpecialtyDropdown('filterSpecialty');
+      SMG.populateSpecialtyDropdown('filterSpecialty');
 
-        if (params.get('q')) document.getElementById('filterName').value = params.get('q');
-        if (params.get('specialty')) document.getElementById('filterSpecialty').value = params.get('specialty');
-        if (params.get('gender')) {
-          document.querySelectorAll('input[name="gender"]').forEach(function(r) {
-            if (r.value === params.get('gender')) r.checked = true;
-          });
-        }
+      document.getElementById('filterName').value = q;
+      document.getElementById('filterSpecialty').value = specialty;
 
-        var currentPage = parseInt(params.get('page')) || 1;
-        SMG.renderDoctorsGrid('doctorGrid', 'pagination', {
-          q: params.get('q') || '',
-          specialty: params.get('specialty') || '',
-          gender: params.get('gender') || '',
-          page: currentPage
-        });
+      var genderRadio = document.querySelector('input[name="gender"][value="' + gender + '"]');
+      if (genderRadio) genderRadio.checked = true;
+      else document.querySelector('input[name="gender"][value=""]').checked = true;
 
-        document.getElementById('filterForm').addEventListener('submit', function(e) {
-          e.preventDefault();
-          var q = document.getElementById('filterName').value.trim();
-          var s = document.getElementById('filterSpecialty').value;
-          var g = document.querySelector('input[name="gender"]:checked').value;
-          var p = new URLSearchParams();
-          if (q) p.set('q', q);
-          if (s) p.set('specialty', s);
-          if (g) p.set('gender', g);
-          window.location.href = './doctors.html' + (p.toString() ? '?' + p.toString() : '');
-        });
+      SMG.renderDoctorsGrid('doctorGrid', 'pagination', {
+        q: q,
+        specialty: specialty,
+        gender: gender,
+        page: page
+      });
 
-      } else {
-        document.getElementById('modeSpecialties').style.display = '';
-        document.title = 'التخصصات الطبية — دليل شبين الكوم الطبي';
-        SMG.renderSpecialtiesGrid('doctorsSpecGrid');
-      }
-    })();
-  </script>
+      document.getElementById('filterForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var q = document.getElementById('filterName').value.trim();
+        var s = document.getElementById('filterSpecialty').value;
+        var g = document.querySelector('input[name="gender"]:checked').value;
+        var p = new URLSearchParams();
+        if (q) p.set('q', q);
+        if (s) p.set('specialty', s);
+        if (g) p.set('gender', g);
+        window.location.href = './doctors.html' + (p.toString() ? '?' + p.toString() : '');
+      });
+
+    } else {
+      document.getElementById('modeSpecialties').style.display = '';
+      document.getElementById('modeListing').style.display = 'none';
+      document.title = 'التخصصات الطبية — دليل شبين الكوم الطبي';
+      SMG.renderSpecialtiesGrid('doctorsSpecGrid');
+    }
+  })();
+</script>
 </body>
 </html>
