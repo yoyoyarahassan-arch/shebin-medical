@@ -195,17 +195,19 @@
     </div>
   </footer>
 
-  <script src="./app.js"></script>
-  <script>
-    var params = new URLSearchParams(window.location.search);
-    var entityId = params.get('id') || params.get('slug');
-    if (entityId) {
-      SMG.renderEntityProfile(entityId);
-    } else {
-      document.getElementById('entityName').textContent = 'لم يتم تحديد المنشأة';
-      document.getElementById('breadcrumbName').textContent = 'غير موجود';
-      document.getElementById('entityPhones').innerHTML = '';
-    }
-  </script>
+  <script src="./config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="./app.js"></script>
+<script>
+  var params = new URLSearchParams(window.location.search);
+  var entityId = params.get('id') || params.get('slug');
+  if (entityId) {
+    SMG.renderEntityProfile(entityId);
+  } else {
+    document.getElementById('entityName').textContent = 'لم يتم تحديد المنشأة';
+    document.getElementById('breadcrumbName').textContent = 'غير موجود';
+    document.getElementById('entityPhones').innerHTML = '';
+  }
+</script>
 </body>
 </html>
