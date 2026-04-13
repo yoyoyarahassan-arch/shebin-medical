@@ -101,9 +101,9 @@
           </div>
 
           <div>
-  <label for="imageFile" style="font-weight:700;display:block;margin-bottom:8px">صورة الطبيب</label>
-  <input id="imageFile" type="file" accept="image/*" style="width:100%;padding:14px;border:1px solid #ddd;border-radius:12px;font-family:inherit">
-</div>
+            <label for="imageFile" style="font-weight:700;display:block;margin-bottom:8px">صورة الطبيب</label>
+            <input id="imageFile" type="file" accept="image/*" style="width:100%;padding:14px;border:1px solid #ddd;border-radius:12px;font-family:inherit">
+          </div>
 
           <div>
             <label for="gender" style="font-weight:700;display:block;margin-bottom:8px">النوع</label>
@@ -162,39 +162,77 @@
       e.preventDefault();
 
       formMessage.textContent = '';
+      formMessage.style.color = '';
       submitBtn.disabled = true;
       submitBtn.innerHTML = '<span class="material-icons-round">hourglass_top</span> جاري الإرسال...';
 
-      const data = {
-        request_type: document.getElementById('request_type').value,
-        doctor_name: document.getElementById('doctor_name').value.trim(),
-        specialty: document.getElementById('specialty').value.trim(),
-        subtitle: document.getElementById('subtitle').value.trim(),
-        address: document.getElementById('address').value.trim(),
-        phone1: document.getElementById('phone1').value.trim(),
-        phone2: document.getElementById('phone2').value.trim(),
-        phone3: document.getElementById('phone3').value.trim(),
-        hours: document.getElementById('hours').value.trim(),
-        services: document.getElementById('services').value.trim(),
-        image: document.getElementById('image').value.trim(),
-        gender: document.getElementById('gender').value.trim(),
-        slug: document.getElementById('slug').value.trim(),
-        notes: document.getElementById('notes').value.trim(),
-        status: 'pending'
-      };
+      let imageUrl = '';
 
-      const { error } = await supabaseClient
-        .from('doctor_edit_requests')
-        .insert([data]);
+      try {
+        const fileInput = document.getElementById('imageFile');
+        const file = fileInput && fileInput.files ? fileInput.files[0] : null;
 
-      if (error) {
-        console.error(error);
+        if (file) {
+          const cleanName = file.name.replace(/\s+/g, '-');
+          const fileName = Date.now() + '-' + cleanName;
+
+          const { error: uploadError } = await supabaseClient
+            .storage
+            .from('doctors')
+            .upload(fileName, file);
+
+          if (uploadError) {
+            console.error(uploadError);
+            formMessage.style.color = '#dc2626';
+            formMessage.textContent = 'فشل رفع الصورة، جرّب مرة تانية.';
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<span class="material-icons-round">send</span> إرسال الطلب';
+            return;
+          }
+
+          const { data: publicUrlData } = supabaseClient
+            .storage
+            .from('doctors')
+            .getPublicUrl(fileName);
+
+          imageUrl = publicUrlData.publicUrl;
+        }
+
+        const data = {
+          request_type: document.getElementById('request_type').value,
+          doctor_name: document.getElementById('doctor_name').value.trim(),
+          specialty: document.getElementById('specialty').value.trim(),
+          subtitle: document.getElementById('subtitle').value.trim(),
+          address: document.getElementById('address').value.trim(),
+          phone1: document.getElementById('phone1').value.trim(),
+          phone2: document.getElementById('phone2').value.trim(),
+          phone3: document.getElementById('phone3').value.trim(),
+          hours: document.getElementById('hours').value.trim(),
+          services: document.getElementById('services').value.trim(),
+          image: imageUrl,
+          gender: document.getElementById('gender').value.trim(),
+          slug: document.getElementById('slug').value.trim(),
+          notes: document.getElementById('notes').value.trim(),
+          status: 'pending'
+        };
+
+        const { error } = await supabaseClient
+          .from('doctor_edit_requests')
+          .insert([data]);
+
+        if (error) {
+          console.error(error);
+          formMessage.style.color = '#dc2626';
+          formMessage.textContent = 'حصل خطأ أثناء إرسال الطلب. راجع البيانات وجرب مرة تانية.';
+        } else {
+          formMessage.style.color = '#059669';
+          formMessage.textContent = 'تم إرسال الطلب بنجاح، وسيتم مراجعته قبل النشر أو التعديل.';
+          form.reset();
+        }
+      } catch (err) {
+        console.error(err);
         formMessage.style.color = '#dc2626';
-        formMessage.textContent = 'حصل خطأ أثناء إرسال الطلب. راجع البيانات وجرب مرة تانية.';
-      } else {
-        formMessage.style.color = '#059669';
-        formMessage.textContent = 'تم إرسال الطلب بنجاح، وسيتم مراجعته قبل النشر أو التعديل.';
-        form.reset();
+        formMessage.textContent = 'حصل خطأ غير متوقع. جرّب مرة تانية.';
       }
 
       submitBtn.disabled = false;
