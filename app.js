@@ -732,7 +732,12 @@
       var phonesEl = document.getElementById('doctorPhones');
       var callBtn = document.getElementById('doctorCallBtn');
       if (phonesEl) {
-        var phones = doc.phones || [];
+      var phones = [];
+
+if (doc.phone1) phones.push(doc.phone1);
+if (doc.phone2) phones.push(doc.phone2);
+if (doc.phone3) phones.push(doc.phone3);
+if (!phones.length && doc.phones) phones = doc.phones;
         if (phones.length) {
           var labels = ['موبايل الحجز', 'هاتف العيادة', 'رقم آخر'];
           var icons = ['phone_iphone', 'phone', 'smartphone'];
