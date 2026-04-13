@@ -15,7 +15,6 @@
 </head>
 <body class="smg-body smg-homepage">
 
-  <!-- ========== Header ========== -->
   <header class="smg-header">
     <div class="smg-container smg-header-inner">
       <a class="smg-brand" href="./index.html">
@@ -39,7 +38,6 @@
   </header>
   <div class="smg-mobile-overlay" id="smgMenuOverlay"></div>
 
-  <!-- ========== Hero ========== -->
   <div id="smg-home">
     <header class="smg-hero">
       <div class="smg-hero-bg"></div>
@@ -60,7 +58,6 @@
       </div>
     </header>
 
-    <!-- ========== Service Categories ========== -->
     <section class="smg-services-wrap" aria-label="الخدمات الطبية">
       <div class="smg-container">
         <div class="smg-services-grid">
@@ -98,7 +95,6 @@
       </div>
     </section>
 
-    <!-- ========== CTA Block ========== -->
     <section class="smg-cta-block">
       <div class="smg-container">
         <div style="display:flex;justify-content:center;margin-bottom:16px">
@@ -115,13 +111,11 @@
     </section>
   </div>
 
-  <!-- ========== Alert Bar ========== -->
   <div class="smg-alert-bar" role="alert">
     <span class="material-icons-round">warning</span>
     <span>تنبيه هام: المواعيد قابلة للتغيير، اتصل قبل الزيارة</span>
   </div>
 
-  <!-- ========== Footer ========== -->
   <footer class="smg-footer">
     <div class="smg-container">
       <div class="smg-footer-grid">
@@ -174,18 +168,18 @@
     </div>
   </footer>
 
-<script src="./config.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-<script src="./app.js"></script>
-<script>
-  SMG.populateSearchDropdown('heroSpecialtySelect');
+  <script src="./config.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="./app.js"></script>
+  <script>
+    SMG.populateSearchDropdown('heroSpecialtySelect');
 
-  document.getElementById('heroSearchForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    var q = document.getElementById('heroSearchInput').value.trim();
-    var val = document.getElementById('heroSpecialtySelect').value;
-    SMG.handleHeroSearch(q, val);
-  });
-</script>
+    document.getElementById('heroSearchForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var q = document.getElementById('heroSearchInput').value.trim();
+      var val = document.getElementById('heroSpecialtySelect').value;
+      SMG.handleHeroSearch(q, val);
+    });
+  </script>
 </body>
 </html>
