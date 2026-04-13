@@ -149,9 +149,8 @@
 <script src="./config.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script>
-    const SUPABASE_URL = 'https://zuuikhlfeluiyehlpuvk.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp1dWlraGxmZWx1aXllaGxwdXZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYwMjI3NzMsImV4cCI6MjA5MTU5ODc3M30.yhwCCpwz__WqIfCiNqq-a2Hos6Jibn51juq72X5x9HY';
-
+    const SUPABASE_URL = window.SUPABASE_CONFIG.url;
+const SUPABASE_ANON_KEY = window.SUPABASE_CONFIG.anonKey;
     const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     const form = document.getElementById('doctorRequestForm');
