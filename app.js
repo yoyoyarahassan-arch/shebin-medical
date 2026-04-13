@@ -9,8 +9,8 @@
   var CONFIG = {
     dataSource: 'supabase',
     supabase: {
-      url: window.SUPABASE_CONFIG.url,
-anonKey: window.SUPABASE_CONFIG.anonKey,
+      url: (window.SUPABASE_CONFIG && window.SUPABASE_CONFIG.url) ? window.SUPABASE_CONFIG.url : '',
+      anonKey: (window.SUPABASE_CONFIG && window.SUPABASE_CONFIG.anonKey) ? window.SUPABASE_CONFIG.anonKey : '',
       tableDoctors: 'doctors',
       tableSpecialties: 'specialties'
     },
