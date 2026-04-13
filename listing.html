@@ -120,45 +120,42 @@
     </div>
   </footer>
 
-  <script src="./app.js"></script>
-  <script>
-    (function() {
-      var params = new URLSearchParams(window.location.search);
-      var category = params.get('category') || 'hospitals';
-      var q = params.get('q') || '';
-      var page = parseInt(params.get('page')) || 1;
+  <script src="./config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="./app.js"></script>
+<script>
+  (function() {
+    var params = new URLSearchParams(window.location.search);
+    var category = params.get('category') || 'hospitals';
+    var q = params.get('q') || '';
+    var page = parseInt(params.get('page') || '1', 10);
 
-      var meta = SMG.getCategoryMeta(category);
+    var meta = SMG.getCategoryMeta(category);
 
-      // Update page head
-      document.title = meta.listName + ' — دليل شبين الكوم الطبي';
-      document.getElementById('pageDesc').setAttribute('content', 'تصفح ' + meta.listName + ' في شبين الكوم — دليل شبين الكوم الطبي الموثوق');
+    document.title = meta.listName + ' — دليل شبين الكوم الطبي';
+    document.getElementById('pageDesc').setAttribute('content', 'تصفح ' + meta.listName + ' في شبين الكوم — دليل شبين الكوم الطبي الموثوق');
 
-      // Update category header
-      document.getElementById('catHeaderTitle').textContent = meta.listName;
-      document.getElementById('catHeaderName').textContent = meta.listName;
-      document.getElementById('catHeaderDesc').textContent = meta.name + ' في شبين الكوم والمنوفية';
-      document.getElementById('catHeaderIconInner').textContent = meta.icon;
-      document.getElementById('catHeaderIcon').style.background = meta.bg;
-      document.getElementById('catHeaderIcon').style.color = meta.color;
+    document.getElementById('catHeaderTitle').textContent = meta.listName;
+    document.getElementById('catHeaderName').textContent = meta.listName;
+    document.getElementById('catHeaderDesc').textContent = meta.name + ' في شبين الكوم والمنوفية';
+    document.getElementById('catHeaderIconInner').textContent = meta.icon;
+    document.getElementById('catHeaderIcon').style.background = meta.bg;
+    document.getElementById('catHeaderIcon').style.color = meta.color;
 
-      // Update search placeholder
-      document.getElementById('catSearchInput').placeholder = 'ابحث في ' + meta.listName + '...';
-      if (q) document.getElementById('catSearchInput').value = q;
+    document.getElementById('catSearchInput').placeholder = 'ابحث في ' + meta.listName + '...';
+    if (q) document.getElementById('catSearchInput').value = q;
 
-      // Render entities
-      SMG.renderEntitiesGrid('entityGrid', 'pagination', category, { q: q, page: page });
+    SMG.renderEntitiesGrid('entityGrid', 'pagination', category, { q: q, page: page });
 
-      // Search form
-      document.getElementById('catSearchForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        var newQ = document.getElementById('catSearchInput').value.trim();
-        var p = new URLSearchParams();
-        p.set('category', category);
-        if (newQ) p.set('q', newQ);
-        window.location.href = './listing.html?' + p.toString();
-      });
-    })();
-  </script>
+    document.getElementById('catSearchForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var newQ = document.getElementById('catSearchInput').value.trim();
+      var p = new URLSearchParams();
+      p.set('category', category);
+      if (newQ) p.set('q', newQ);
+      window.location.href = './listing.html?' + p.toString();
+    });
+  })();
+</script>
 </body>
 </html>
