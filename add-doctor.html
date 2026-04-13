@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>أضف طبيب — دليل شبين الكوم الطبي</title>
-  <meta name="description" content="أضف بيانات طبيبك أو منشأتك الطبية إلى دليل شبين الكوم الطبي.">
+  <meta name="description" content="أضف بيانات طبيبك أو اطلب تعديل بياناتك في دليل شبين الكوم الطبي.">
   <link rel="canonical" href="./add-doctor.html">
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
@@ -30,25 +30,108 @@
   </header>
   <div class="smg-mobile-overlay" id="smgMenuOverlay"></div>
 
-  <div class="smg-add-doctor-wrap">
-    <div class="smg-add-doctor-card">
-      <div class="smg-add-doctor-header">
-        <h1>إضافة طبيب / منشأة طبية</h1>
+  <div class="smg-static-wrap">
+    <div class="smg-container" style="max-width: 860px;">
+      <nav class="smg-static-breadcrumb">
+        <a href="./index.html">الرئيسية</a>
+        <span class="material-icons-round" style="font-size:14px">chevron_left</span>
+        <span>أضف طبيب / طلب تعديل</span>
+      </nav>
+
+      <div class="smg-static-hero">
+        <span class="material-icons-round" style="font-size:44px;margin-bottom:12px;display:block">post_add</span>
+        <h1>إضافة طبيب أو طلب تعديل بيانات</h1>
+        <p>املأ النموذج وسيتم مراجعة الطلب قبل النشر أو التعديل</p>
       </div>
-      <div class="smg-add-doctor-body">
-        <p class="smg-add-doctor-section-title">قبل البدء</p>
-        <ul class="smg-add-doctor-list">
-          <li>اكتب الاسم والتخصص أو نوع المنشأة بوضوح</li>
-          <li>يمكنك رفع صورة أو لوجو العيادة إن وجد</li>
-          <li>تأكد من صحة أرقام الهواتف والعنوان</li>
-          <li>سيتم مراجعة البيانات قبل النشر</li>
-        </ul>
-        <div class="smg-add-doctor-btns">
-          <a class="btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLSc4a_aJBaMgqUQDj_pFVDIA8FLml3IvL4BhPZKux1IoMt2Z1g/viewform?usp=header" rel="noopener" target="_blank">ملء نموذج البيانات</a>
-          <a class="btn-secondary" href="./index.html">العودة للرئيسية</a>
-        </div>
+
+      <div class="smg-static-content" style="background:#fff;border-radius:20px;padding:24px;box-shadow:0 10px 30px rgba(0,0,0,.08);">
+        <form id="doctorRequestForm" style="display:grid;gap:16px">
+          <div>
+            <label for="request_type" style="font-weight:700;display:block;margin-bottom:8px">نوع الطلب</label>
+            <select id="request_type" name="request_type" required style="width:100%;padding:14px;border:1px solid #ddd;border-radius:12px;font-family:inherit">
+              <option value="">اختر نوع الطلب</option>
+              <option value="add">إضافة طبيب جديد</option>
+              <option value="edit">تعديل بيانات طبيب موجود</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="doctor_name" style="font-weight:700;display:block;margin-bottom:8px">اسم الطبيب</label>
+            <input id="doctor_name" name="doctor_name" type="text" required placeholder="مثال: د. أحمد محمود" style="width:100%;padding:14px;border:1px solid #ddd;border-radius:12px;font-family:inherit">
+          </div>
+
+          <div>
+            <label for="specialty" style="font-weight:700;display:block;margin-bottom:8px">التخصص</label>
+            <input id="specialty" name="specialty" type="text" required placeholder="مثال: باطنة" style="width:100%;padding:14px;border:1px solid #ddd;border-radius:12px;font-family:inherit">
+          </div>
+
+          <div>
+            <label for="subtitle" style="font-weight:700;display:block;margin-bottom:8px">وصف مختصر</label>
+            <input id="subtitle" name="subtitle" type="text" placeholder="مثال: استشاري الباطنة والجهاز الهضمي" style="width:100%;padding:14px;border:1px solid #ddd;border-radius:12px;font-family:inherit">
+          </div>
+
+          <div>
+            <label for="address" style="font-weight:700;display:block;margin-bottom:8px">العنوان</label>
+            <input id="address" name="address" type="text" required placeholder="مثال: شارع الجلاء، شبين الكوم" style="width:100%;padding:14px;border:1px solid #ddd;border-radius:12px;font-family:inherit">
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr;gap:12px">
+            <div>
+              <label for="phone1" style="font-weight:700;display:block;margin-bottom:8px">رقم الهاتف 1</label>
+              <input id="phone1" name="phone1" type="text" required placeholder="010..." style="width:100%;padding:14px;border:1px solid #ddd;border-radius:12px;font-family:inherit">
+            </div>
+            <div>
+              <label for="phone2" style="font-weight:700;display:block;margin-bottom:8px">رقم الهاتف 2</label>
+              <input id="phone2" name="phone2" type="text" placeholder="اختياري" style="width:100%;padding:14px;border:1px solid #ddd;border-radius:12px;font-family:inherit">
+            </div>
+            <div>
+              <label for="phone3" style="font-weight:700;display:block;margin-bottom:8px">رقم الهاتف 3</label>
+              <input id="phone3" name="phone3" type="text" placeholder="اختياري" style="width:100%;padding:14px;border:1px solid #ddd;border-radius:12px;font-family:inherit">
+            </div>
+          </div>
+
+          <div>
+            <label for="hours" style="font-weight:700;display:block;margin-bottom:8px">مواعيد العمل</label>
+            <input id="hours" name="hours" type="text" placeholder="مثال: يوميًا من 5 مساءً إلى 10 مساءً" style="width:100%;padding:14px;border:1px solid #ddd;border-radius:12px;font-family:inherit">
+          </div>
+
+          <div>
+            <label for="services" style="font-weight:700;display:block;margin-bottom:8px">الخدمات</label>
+            <textarea id="services" name="services" rows="3" placeholder="مثال: كشف باطنة - متابعة أمراض مزمنة" style="width:100%;padding:14px;border:1px solid #ddd;border-radius:12px;font-family:inherit"></textarea>
+          </div>
+
+          <div>
+            <label for="image" style="font-weight:700;display:block;margin-bottom:8px">رابط الصورة</label>
+            <input id="image" name="image" type="text" placeholder="اختياري" style="width:100%;padding:14px;border:1px solid #ddd;border-radius:12px;font-family:inherit">
+          </div>
+
+          <div>
+            <label for="gender" style="font-weight:700;display:block;margin-bottom:8px">النوع</label>
+            <select id="gender" name="gender" style="width:100%;padding:14px;border:1px solid #ddd;border-radius:12px;font-family:inherit">
+              <option value="">اختر</option>
+              <option value="دكتور">دكتور</option>
+              <option value="دكتورة">دكتورة</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="slug" style="font-weight:700;display:block;margin-bottom:8px">معرّف الرابط (اختياري)</label>
+            <input id="slug" name="slug" type="text" placeholder="مثال: ahmed-mahmoud" style="width:100%;padding:14px;border:1px solid #ddd;border-radius:12px;font-family:inherit">
+          </div>
+
+          <div>
+            <label for="notes" style="font-weight:700;display:block;margin-bottom:8px">ملاحظات إضافية</label>
+            <textarea id="notes" name="notes" rows="4" placeholder="اكتب أي ملاحظات أو التعديلات المطلوبة" style="width:100%;padding:14px;border:1px solid #ddd;border-radius:12px;font-family:inherit"></textarea>
+          </div>
+
+          <button type="submit" id="submitBtn" class="smg-btn-add" style="justify-content:center;border:none;cursor:pointer">
+            <span class="material-icons-round">send</span>
+            إرسال الطلب
+          </button>
+
+          <div id="formMessage" style="font-weight:700"></div>
+        </form>
       </div>
-      <div class="smg-add-doctor-footer"><div class="dec"></div></div>
     </div>
   </div>
 
@@ -59,35 +142,64 @@
           <div class="smg-footer-brand"><span class="material-icons-round smg-footer-brand-ico">medical_services</span><span class="smg-footer-brand-text">دليل شبين الكوم الطبي</span></div>
           <p class="smg-footer-desc"><strong>منصتك الأولى للوصول إلى أفضل خدمات الرعاية الصحية</strong> في مدينة شبين الكوم.</p>
         </div>
-        <div>
-          <h4>روابط سريعة</h4>
-          <ul>
-            <li><a href="./index.html">الرئيسية</a></li>
-            <li><a href="./about.html">من نحن</a></li>
-            <li><a href="./contact.html">اتصل بنا</a></li>
-            <li><a href="./privacy.html">سياسة الخصوصية</a></li>
-            <li><a href="./disclaimer.html">إخلاء المسؤولية</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>أهم التخصصات</h4>
-          <ul>
-            <li><a href="./doctors.html?specialty=باطنة">الباطنة</a></li>
-            <li><a href="./doctors.html?specialty=أسنان">الأسنان</a></li>
-            <li><a href="./doctors.html?specialty=نساء وتوليد">النساء والتوليد</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4>تواصل معنا</h4>
-          <ul>
-            <li><a href="mailto:info@shibin-med.com"><span class="material-icons-round" style="vertical-align:middle">email</span> info@shibin-med.com</a></li>
-          </ul>
-        </div>
       </div>
       <div class="smg-footer-copy">© 2026 دليل شبين الكوم الطبي. جميع الحقوق محفوظة.</div>
     </div>
   </footer>
 
-  <script src="./app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script>
+    const SUPABASE_URL = 'https://zuuikhlfeluiyehlpuvk.supabase.co';
+    const SUPABASE_ANON_KEY = 'PUT_YOUR_ANON_KEY_HERE';
+
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const form = document.getElementById('doctorRequestForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const formMessage = document.getElementById('formMessage');
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      formMessage.textContent = '';
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="material-icons-round">hourglass_top</span> جاري الإرسال...';
+
+      const data = {
+        request_type: document.getElementById('request_type').value,
+        doctor_name: document.getElementById('doctor_name').value.trim(),
+        specialty: document.getElementById('specialty').value.trim(),
+        subtitle: document.getElementById('subtitle').value.trim(),
+        address: document.getElementById('address').value.trim(),
+        phone1: document.getElementById('phone1').value.trim(),
+        phone2: document.getElementById('phone2').value.trim(),
+        phone3: document.getElementById('phone3').value.trim(),
+        hours: document.getElementById('hours').value.trim(),
+        services: document.getElementById('services').value.trim(),
+        image: document.getElementById('image').value.trim(),
+        gender: document.getElementById('gender').value.trim(),
+        slug: document.getElementById('slug').value.trim(),
+        notes: document.getElementById('notes').value.trim(),
+        status: 'pending'
+      };
+
+      const { error } = await supabaseClient
+        .from('doctor_edit_requests')
+        .insert([data]);
+
+      if (error) {
+        console.error(error);
+        formMessage.style.color = '#dc2626';
+        formMessage.textContent = 'حصل خطأ أثناء إرسال الطلب. راجع البيانات وجرب مرة تانية.';
+      } else {
+        formMessage.style.color = '#059669';
+        formMessage.textContent = 'تم إرسال الطلب بنجاح، وسيتم مراجعته قبل النشر أو التعديل.';
+        form.reset();
+      }
+
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<span class="material-icons-round">send</span> إرسال الطلب';
+    });
+  </script>
 </body>
 </html>
