@@ -174,19 +174,22 @@
     </div>
   </footer>
 
-  <script src="./app.js"></script>
-  <script>
-    // Populate hero search dropdown (doctors + other categories)
-    SMG.populateSearchDropdown('heroSpecialtySelect');
+  <!-- Supabase لازم ييجي الأول -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
-    // Hero search form handler
-    document.getElementById('heroSearchForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      var q = document.getElementById('heroSearchInput').value.trim();
-      var val = document.getElementById('heroSpecialtySelect').value;
-      SMG.handleHeroSearch(q, val);
-    });
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<!-- ملف الموقع -->
+<script src="./app.js"></script>
+
+<!-- كود التشغيل -->
+<script>
+  SMG.populateSearchDropdown('heroSpecialtySelect');
+
+  document.getElementById('heroSearchForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var q = document.getElementById('heroSearchInput').value.trim();
+    var val = document.getElementById('heroSpecialtySelect').value;
+    SMG.handleHeroSearch(q, val);
+  });
+</script>
 </body>
 </html>
