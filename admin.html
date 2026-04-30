@@ -1,348 +1,970 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>لوحة الإدارة — دليل شبين الكوم الطبي</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <title>لوحة الإدارة | دليل شبين الكوم الطبي</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    * { box-sizing: border-box; }
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --primary-soft: #dbeafe;
+      --success: #16a34a;
+      --success-soft: #dcfce7;
+      --danger: #dc2626;
+      --danger-soft: #fee2e2;
+      --warning: #d97706;
+      --warning-soft: #fef3c7;
+      --ink: #0f172a;
+      --muted: #64748b;
+      --line: #e2e8f0;
+      --panel: #ffffff;
+      --surface: #f8fafc;
+      --surface-strong: #f1f5f9;
+      --shadow: 0 18px 45px rgba(15, 23, 42, .08);
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      direction: rtl;
+    }
+
     body {
       margin: 0;
-      font-family: "Cairo", sans-serif;
-      background: #f6f8fb;
-      color: #1f2937;
+      min-height: 100vh;
+      font-family: "Cairo", Arial, sans-serif;
+      background:
+        linear-gradient(135deg, rgba(37, 99, 235, .07), transparent 32%),
+        linear-gradient(315deg, rgba(22, 163, 74, .06), transparent 30%),
+        var(--surface);
+      color: var(--ink);
     }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
     }
-    .topbar {
-      background: #ffffff;
-      border-bottom: 1px solid #e5e7eb;
-      position: sticky;
-      top: 0;
-      z-index: 10;
+
+    button {
+      border: 0;
     }
-    .topbar-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 16px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
+
+    a {
+      color: inherit;
     }
-    .title {
-      font-size: 22px;
-      font-weight: 800;
+
+    .hidden {
+      display: none !important;
     }
-    .muted {
-      color: #6b7280;
-      font-size: 14px;
-    }
-    .login-box, .panel, .request-card {
-      background: #fff;
-      border: 1px solid #e5e7eb;
-      border-radius: 18px;
-      box-shadow: 0 10px 25px rgba(0,0,0,.04);
-    }
-    .login-box {
-      max-width: 460px;
-      margin: 60px auto;
+
+    .login-screen {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
       padding: 24px;
     }
-    .login-box h2 {
-      margin-top: 0;
-      font-size: 24px;
+
+    .login-card {
+      width: min(100%, 480px);
+      background: rgba(255, 255, 255, .92);
+      border: 1px solid rgba(226, 232, 240, .9);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px;
+      backdrop-filter: blur(14px);
     }
-    .field {
-      margin-bottom: 14px;
-    }
-    .field label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 700;
-    }
-    .field input, .field select, .field textarea {
-      width: 100%;
-      padding: 14px;
-      border: 1px solid #d1d5db;
-      border-radius: 12px;
-      font-family: inherit;
-      font-size: 15px;
-    }
-    .btn {
-      border: none;
-      border-radius: 12px;
-      padding: 12px 18px;
-      font-family: inherit;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    .btn-primary {
-      background: #0f766e;
-      color: #fff;
-    }
-    .btn-secondary {
-      background: #111827;
-      color: #fff;
-    }
-    .btn-danger {
-      background: #dc2626;
-      color: #fff;
-    }
-    .btn-warning {
-      background: #d97706;
-      color: #fff;
-    }
-    .btn-light {
-      background: #f3f4f6;
-      color: #111827;
-      border: 1px solid #e5e7eb;
-    }
-    .toolbar {
+
+    .login-brand {
       display: flex;
-      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      border-radius: var(--radius);
+      display: grid;
+      place-items: center;
+      background: var(--primary);
+      color: #fff;
+      font-size: 22px;
+      font-weight: 800;
+      box-shadow: 0 12px 24px rgba(37, 99, 235, .22);
+    }
+
+    .brand-title {
+      font-weight: 800;
+      font-size: 20px;
+      line-height: 1.25;
+    }
+
+    .brand-subtitle {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .login-card h1 {
+      margin: 0 0 8px;
+      font-size: 26px;
+      letter-spacing: 0;
+    }
+
+    .login-card p {
+      margin: 0 0 22px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .field label {
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .input-control {
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      color: var(--ink);
+      outline: none;
+      transition: border-color .18s ease, box-shadow .18s ease;
+    }
+
+    .input-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, .12);
+    }
+
+    .btn {
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: var(--radius);
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease, opacity .15s ease;
+      white-space: nowrap;
+    }
+
+    .btn:disabled {
+      cursor: not-allowed;
+      opacity: .65;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .btn:not(:disabled):hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 10px 22px rgba(37, 99, 235, .20);
+    }
+
+    .btn-primary:not(:disabled):hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-light {
+      background: #fff;
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+
+    .btn-success {
+      background: var(--success);
+      color: #fff;
+      box-shadow: 0 10px 22px rgba(22, 163, 74, .18);
+    }
+
+    .btn-danger {
+      background: var(--danger);
+      color: #fff;
+      box-shadow: 0 10px 22px rgba(220, 38, 38, .16);
+    }
+
+    .btn-warning {
+      background: #f59e0b;
+      color: #111827;
+      box-shadow: 0 10px 22px rgba(217, 119, 6, .18);
+    }
+
+    .login-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .login-actions .btn {
+      flex: 1;
+    }
+
+    .msg {
+      min-height: 22px;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.6;
+    }
+
+    .msg.error {
+      color: var(--danger);
+    }
+
+    .msg.success {
+      color: var(--success);
+    }
+
+    .app-shell {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      background: #0f172a;
+      color: #e5e7eb;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .sidebar .brand-mark {
+      background: var(--primary);
+      box-shadow: none;
+      flex: 0 0 auto;
+    }
+
+    .sidebar-brand {
+      display: flex;
       gap: 12px;
       align-items: center;
-      justify-content: space-between;
-      margin-bottom: 18px;
     }
-    .toolbar-left, .toolbar-right {
+
+    .sidebar-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.35;
+    }
+
+    .sidebar-subtitle {
+      margin-top: 3px;
+      color: #94a3b8;
+      font-size: 12px;
+    }
+
+    .side-section {
+      display: grid;
+      gap: 10px;
+    }
+
+    .side-label {
+      color: #94a3b8;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .side-item {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-radius: var(--radius);
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, .06);
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .side-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--primary);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, .18);
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      display: grid;
+      gap: 12px;
+    }
+
+    .session-box {
+      background: rgba(255, 255, 255, .06);
+      border: 1px solid rgba(148, 163, 184, .22);
+      border-radius: var(--radius);
+      padding: 12px;
+      color: #cbd5e1;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .main-panel {
+      min-width: 0;
+      padding: 22px;
+    }
+
+    .top-header {
+      background: rgba(255, 255, 255, .9);
+      border: 1px solid rgba(226, 232, 240, .9);
+      border-radius: var(--radius);
+      box-shadow: 0 12px 30px rgba(15, 23, 42, .06);
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
+      backdrop-filter: blur(14px);
+    }
+
+    .page-kicker {
+      margin-bottom: 5px;
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .page-title {
+      margin: 0;
+      font-size: 26px;
+      line-height: 1.3;
+      letter-spacing: 0;
+    }
+
+    .page-desc {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .header-actions {
       display: flex;
       gap: 10px;
-      align-items: center;
       flex-wrap: wrap;
+      align-items: center;
     }
-    .panel {
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .stat-card {
+      position: relative;
+      overflow: hidden;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      min-height: 118px;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, .05);
+    }
+
+    .stat-card::after {
+      content: "";
+      position: absolute;
+      inset-inline-start: -42px;
+      inset-block-start: -42px;
+      width: 118px;
+      height: 118px;
+      border-radius: 50%;
+      background: rgba(37, 99, 235, .10);
+    }
+
+    .stat-card.success::after {
+      background: rgba(22, 163, 74, .12);
+    }
+
+    .stat-card.warning::after {
+      background: rgba(217, 119, 6, .14);
+    }
+
+    .stat-card.danger::after {
+      background: rgba(220, 38, 38, .12);
+    }
+
+    .stat-label {
+      position: relative;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      z-index: 1;
+    }
+
+    .stat-value {
+      position: relative;
+      margin-top: 10px;
+      font-size: 34px;
+      line-height: 1;
+      font-weight: 800;
+      z-index: 1;
+    }
+
+    .stat-hint {
+      position: relative;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 12px;
+      z-index: 1;
+    }
+
+    .filters-panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 28px rgba(15, 23, 42, .05);
       padding: 16px;
       margin-bottom: 18px;
     }
+
+    .filters-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .filters-title {
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .filters-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .7fr .7fr auto;
+      gap: 12px;
+      align-items: end;
+    }
+
+    .filter-field {
+      display: grid;
+      gap: 7px;
+    }
+
+    .filter-field label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .message-bar {
+      border-radius: var(--radius);
+      padding: 13px 14px;
+      margin-bottom: 18px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      font-weight: 800;
+      line-height: 1.7;
+    }
+
+    .message-bar.error {
+      border-color: #fecaca;
+      background: #fff1f2;
+      color: #991b1b;
+    }
+
+    .message-bar.success {
+      border-color: #bbf7d0;
+      background: #f0fdf4;
+      color: #166534;
+    }
+
+    .message-bar.info {
+      border-color: #bfdbfe;
+      background: #eff6ff;
+      color: #1e40af;
+    }
+
     .requests-grid {
       display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 16px;
+      align-items: start;
     }
+
     .request-card {
-      padding: 18px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 28px rgba(15, 23, 42, .05);
+      overflow: hidden;
     }
-    .card-head {
+
+    .request-top {
+      padding: 16px;
       display: flex;
+      gap: 14px;
       justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #ffffff, #f8fafc);
+    }
+
+    .request-main {
+      min-width: 0;
+      display: flex;
       gap: 12px;
       align-items: flex-start;
-      margin-bottom: 12px;
-      flex-wrap: wrap;
     }
-    .doctor-name {
+
+    .doctor-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius);
+      background: var(--primary-soft);
+      color: var(--primary);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      flex: 0 0 auto;
       font-size: 22px;
       font-weight: 800;
-      margin: 0;
     }
-    .card-subtitle {
-      color: #6b7280;
-      margin-top: 4px;
-      font-size: 14px;
-    }
-    .badges {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 7px 12px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 700;
-      border: 1px solid transparent;
-    }
-    .status-pending {
-      background: #fef3c7;
-      color: #92400e;
-      border-color: #fcd34d;
-    }
-    .status-approved {
-      background: #dcfce7;
-      color: #166534;
-      border-color: #86efac;
-    }
-    .status-ignored {
-      background: #fee2e2;
-      color: #991b1b;
-      border-color: #fca5a5;
-    }
-    .type-add {
-      background: #dbeafe;
-      color: #1d4ed8;
-      border-color: #93c5fd;
-    }
-    .type-edit {
-      background: #ede9fe;
-      color: #6d28d9;
-      border-color: #c4b5fd;
-    }
-    .card-body {
-      display: grid;
-      grid-template-columns: 140px 1fr;
-      gap: 18px;
-    }
-    .doctor-image {
-      width: 140px;
-      height: 140px;
-      border-radius: 16px;
-      background: #f3f4f6;
-      overflow: hidden;
-      border: 1px solid #e5e7eb;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 42px;
-      color: #6b7280;
-      font-weight: 800;
-    }
-    .doctor-image img {
+
+    .doctor-avatar img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
     }
-    .details {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-      gap: 10px 16px;
+
+    .doctor-name {
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.35;
+      font-weight: 800;
+      overflow-wrap: anywhere;
     }
-    .detail-item {
-      background: #f9fafb;
-      border-radius: 12px;
-      padding: 12px;
-      border: 1px solid #eef2f7;
+
+    .doctor-meta {
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
     }
-    .detail-label {
+
+    .badges {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .badge {
+      min-height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 5px 10px;
+      border-radius: 999px;
       font-size: 12px;
-      color: #6b7280;
-      margin-bottom: 4px;
-      font-weight: 700;
+      font-weight: 800;
+      border: 1px solid transparent;
+      white-space: nowrap;
     }
+
+    .status-pending {
+      background: var(--warning-soft);
+      color: #92400e;
+      border-color: #fcd34d;
+    }
+
+    .status-approved {
+      background: var(--success-soft);
+      color: #166534;
+      border-color: #86efac;
+    }
+
+    .status-ignored {
+      background: var(--danger-soft);
+      color: #991b1b;
+      border-color: #fca5a5;
+    }
+
+    .type-add {
+      background: var(--primary-soft);
+      color: #1d4ed8;
+      border-color: #93c5fd;
+    }
+
+    .type-edit {
+      background: #f3e8ff;
+      color: #7e22ce;
+      border-color: #d8b4fe;
+    }
+
+    .request-body {
+      padding: 16px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .detail-item {
+      min-width: 0;
+      background: var(--surface);
+      border: 1px solid #edf2f7;
+      border-radius: var(--radius);
+      padding: 11px;
+    }
+
+    .detail-label {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
     .detail-value {
+      color: var(--ink);
       font-size: 14px;
       font-weight: 700;
-      word-break: break-word;
+      line-height: 1.7;
+      overflow-wrap: anywhere;
+      white-space: pre-line;
     }
+
+    .detail-item.full {
+      grid-column: 1 / -1;
+    }
+
+    .phones-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .phone-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 800;
+      direction: ltr;
+    }
+
     .notes-box {
-      margin-top: 14px;
+      border-radius: var(--radius);
+      border: 1px solid #fed7aa;
       background: #fff7ed;
-      border: 1px solid #fdba74;
-      border-radius: 12px;
       padding: 12px;
+      color: #9a3412;
+      line-height: 1.8;
+      font-size: 14px;
+      font-weight: 700;
     }
+
     .card-actions {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
-      margin-top: 16px;
+      padding-top: 2px;
     }
-    .empty {
+
+    .card-actions .btn {
+      min-width: 112px;
+    }
+
+    .loading-card,
+    .empty-state {
+      grid-column: 1 / -1;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 28px rgba(15, 23, 42, .05);
+      padding: 36px 24px;
       text-align: center;
-      padding: 40px 20px;
-      color: #6b7280;
     }
-    .msg {
-      margin-top: 10px;
-      font-weight: 700;
-      font-size: 14px;
+
+    .loading-spinner {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 4px solid #dbeafe;
+      border-top-color: var(--primary);
+      margin: 0 auto 16px;
+      animation: spin .85s linear infinite;
     }
-    .hidden {
-      display: none !important;
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
     }
-    .count-box {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
+
+    .empty-title {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 8px;
     }
-    .count-chip {
-      background: #fff;
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 10px 14px;
-      font-weight: 700;
+
+    .empty-text {
+      color: var(--muted);
+      line-height: 1.8;
     }
-    @media (max-width: 800px) {
-      .card-body {
+
+    @media (max-width: 1180px) {
+      .requests-grid {
         grid-template-columns: 1fr;
       }
-      .doctor-image {
-        width: 100%;
-        height: 220px;
+
+      .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
-      .details {
+
+      .filters-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 880px) {
+      .app-shell {
         grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+        height: auto;
+      }
+
+      .sidebar-footer {
+        margin-top: 0;
+      }
+
+      .top-header {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .header-actions {
+        justify-content: stretch;
+      }
+
+      .header-actions .btn {
+        flex: 1;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .login-card,
+      .main-panel,
+      .sidebar {
+        padding: 16px;
+      }
+
+      .stats-grid,
+      .filters-grid,
+      .details-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .request-top {
+        flex-direction: column;
+      }
+
+      .badges {
+        justify-content: flex-start;
+      }
+
+      .card-actions .btn {
+        flex: 1 1 100%;
       }
     }
   </style>
 </head>
 <body>
-  <div id="loginView" class="container">
-    <div class="login-box">
-      <h2>تسجيل دخول الإدارة</h2>
-      <p class="muted">ادخل كلمة السر لعرض طلبات الإضافة والتعديل.</p>
+  <div id="loginView" class="login-screen">
+    <section class="login-card">
+      <div class="login-brand">
+        <div class="brand-mark">ش</div>
+        <div>
+          <div class="brand-title">دليل شبين الكوم الطبي</div>
+          <div class="brand-subtitle">لوحة مراجعة طلبات الأطباء</div>
+        </div>
+      </div>
+
+      <h1>تسجيل دخول الإدارة</h1>
+      <p>اكتب كلمة السر الخاصة بلوحة الإدارة لتحميل طلبات الإضافة والتعديل من Worker.</p>
+
       <div class="field">
         <label for="adminPassword">كلمة السر</label>
-        <input id="adminPassword" type="password" placeholder="اكتب كلمة السر">
+        <input id="adminPassword" class="input-control" type="password" autocomplete="current-password" placeholder="اكتب كلمة السر">
       </div>
-      <button id="loginBtn" class="btn btn-primary">دخول</button>
+
+      <div class="login-actions">
+        <button id="loginBtn" class="btn btn-primary" type="button">دخول</button>
+      </div>
+
       <div id="loginMsg" class="msg"></div>
-    </div>
+    </section>
   </div>
 
-  <div id="adminView" class="hidden">
-    <div class="topbar">
-      <div class="topbar-inner">
+  <div id="adminView" class="app-shell hidden">
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-mark">ش</div>
         <div>
-          <div class="title">لوحة إدارة الطلبات</div>
-          <div class="muted">مراجعة طلبات الإضافة والتعديل</div>
-        </div>
-        <div class="toolbar-right">
-          <button id="refreshBtn" class="btn btn-light">تحديث</button>
-          <button id="logoutBtn" class="btn btn-secondary">تسجيل خروج</button>
+          <div class="sidebar-title">دليل شبين الكوم الطبي</div>
+          <div class="sidebar-subtitle">Admin Dashboard</div>
         </div>
       </div>
-    </div>
 
-    <div class="container">
-      <div class="panel">
-        <div class="toolbar">
-          <div class="toolbar-left">
-            <select id="statusFilter">
+      <div class="side-section">
+        <div class="side-label">القائمة</div>
+        <div class="side-item">
+          <span class="side-dot"></span>
+          <span>طلبات الأطباء</span>
+        </div>
+      </div>
+
+      <div class="side-section">
+        <div class="side-label">الحالة</div>
+        <div class="session-box">
+          أنت مسجل دخول باستخدام كلمة سر الإدارة. كل التحديثات تتم عبر Cloudflare Worker فقط.
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <button id="logoutBtn" class="btn btn-light" type="button">تسجيل خروج</button>
+      </div>
+    </aside>
+
+    <main class="main-panel">
+      <header class="top-header">
+        <div>
+          <div class="page-kicker">لوحة الإدارة</div>
+          <h1 class="page-title">إدارة طلبات إضافة وتعديل الأطباء</h1>
+          <div class="page-desc">مراجعة الطلبات وتغيير حالتها إلى Approved أو Ignored أو Pending.</div>
+        </div>
+
+        <div class="header-actions">
+          <button id="refreshBtn" class="btn btn-primary" type="button">تحديث الطلبات</button>
+        </div>
+      </header>
+
+      <section class="stats-grid" aria-label="إحصائيات الطلبات">
+        <article class="stat-card">
+          <div class="stat-label">إجمالي الطلبات</div>
+          <div id="countAll" class="stat-value">0</div>
+          <div class="stat-hint">كل الطلبات المحملة من Worker</div>
+        </article>
+
+        <article class="stat-card warning">
+          <div class="stat-label">Pending</div>
+          <div id="countPending" class="stat-value">0</div>
+          <div class="stat-hint">طلبات قيد المراجعة</div>
+        </article>
+
+        <article class="stat-card success">
+          <div class="stat-label">Approved</div>
+          <div id="countApproved" class="stat-value">0</div>
+          <div class="stat-hint">طلبات تمت الموافقة عليها</div>
+        </article>
+
+        <article class="stat-card danger">
+          <div class="stat-label">Ignored</div>
+          <div id="countIgnored" class="stat-value">0</div>
+          <div class="stat-hint">طلبات تم تجاهلها</div>
+        </article>
+      </section>
+
+      <section class="filters-panel">
+        <div class="filters-head">
+          <div class="filters-title">البحث والفلترة</div>
+          <button id="resetFiltersBtn" class="btn btn-light" type="button">مسح الفلاتر</button>
+        </div>
+
+        <div class="filters-grid">
+          <div class="filter-field">
+            <label for="searchInput">بحث بالاسم أو التليفون</label>
+            <input id="searchInput" class="input-control" type="search" placeholder="مثال: أحمد أو 010">
+          </div>
+
+          <div class="filter-field">
+            <label for="statusFilter">الحالة</label>
+            <select id="statusFilter" class="input-control">
               <option value="all">كل الحالات</option>
               <option value="pending">Pending</option>
               <option value="approved">Approved</option>
               <option value="ignored">Ignored</option>
             </select>
-
-            <select id="typeFilter">
-              <option value="all">كل الأنواع</option>
-              <option value="add">إضافة</option>
-              <option value="edit">تعديل</option>
-            </select>
-
-            <input id="searchInput" type="text" placeholder="ابحث بالاسم أو التخصص أو الرقم">
           </div>
 
-          <div class="count-box">
-            <div class="count-chip">إجمالي: <span id="countAll">0</span></div>
-            <div class="count-chip">Pending: <span id="countPending">0</span></div>
-            <div class="count-chip">Approved: <span id="countApproved">0</span></div>
-            <div class="count-chip">Ignored: <span id="countIgnored">0</span></div>
+          <div class="filter-field">
+            <label for="typeFilter">نوع الطلب</label>
+            <select id="typeFilter" class="input-control">
+              <option value="all">كل الأنواع</option>
+              <option value="add">Add</option>
+              <option value="edit">Edit</option>
+            </select>
+          </div>
+
+          <div class="filter-field">
+            <label>النتيجة</label>
+            <button id="applyFiltersBtn" class="btn btn-light" type="button">تطبيق</button>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div id="requestsGrid" class="requests-grid"></div>
-      <div id="emptyState" class="panel empty hidden">لا توجد طلبات مطابقة.</div>
-    </div>
+      <div id="messageBar" class="message-bar hidden"></div>
+
+      <section id="requestsGrid" class="requests-grid" aria-live="polite"></section>
+
+      <section id="emptyState" class="empty-state hidden">
+        <div class="empty-title">لا توجد طلبات مطابقة</div>
+        <div class="empty-text">جرّب تغيير الفلاتر أو تحديث الطلبات.</div>
+      </section>
+    </main>
   </div>
 
   <script>
@@ -353,20 +975,49 @@
     const adminPasswordInput = document.getElementById('adminPassword');
     const loginBtn = document.getElementById('loginBtn');
     const loginMsg = document.getElementById('loginMsg');
-    const requestsGrid = document.getElementById('requestsGrid');
-    const emptyState = document.getElementById('emptyState');
-    const refreshBtn = document.getElementById('refreshBtn');
     const logoutBtn = document.getElementById('logoutBtn');
+    const refreshBtn = document.getElementById('refreshBtn');
+    const resetFiltersBtn = document.getElementById('resetFiltersBtn');
+    const applyFiltersBtn = document.getElementById('applyFiltersBtn');
     const statusFilter = document.getElementById('statusFilter');
     const typeFilter = document.getElementById('typeFilter');
     const searchInput = document.getElementById('searchInput');
-
+    const messageBar = document.getElementById('messageBar');
+    const requestsGrid = document.getElementById('requestsGrid');
+    const emptyState = document.getElementById('emptyState');
     const countAll = document.getElementById('countAll');
     const countPending = document.getElementById('countPending');
     const countApproved = document.getElementById('countApproved');
     const countIgnored = document.getElementById('countIgnored');
 
+    const STATUS_META = {
+      pending: {
+        label: 'Pending - قيد المراجعة',
+        className: 'status-pending'
+      },
+      approved: {
+        label: 'Approved - موافق عليه',
+        className: 'status-approved'
+      },
+      ignored: {
+        label: 'Ignored - متجاهل',
+        className: 'status-ignored'
+      }
+    };
+
+    const TYPE_META = {
+      add: {
+        label: 'Add - إضافة',
+        className: 'type-add'
+      },
+      edit: {
+        label: 'Edit - تعديل',
+        className: 'type-edit'
+      }
+    };
+
     let allRequests = [];
+    let loadingRequests = false;
 
     function getSavedPassword() {
       return localStorage.getItem('smg_admin_password') || '';
@@ -380,34 +1031,328 @@
       localStorage.removeItem('smg_admin_password');
     }
 
-    function getStatusBadge(status) {
-      const value = status || 'pending';
-      const cls = value === 'approved'
-        ? 'status-approved'
-        : value === 'ignored'
-        ? 'status-ignored'
-        : 'status-pending';
-      const label = value === 'approved'
-        ? 'Approved - موافق عليه'
-        : value === 'ignored'
-        ? 'Ignored - متجاهل'
-        : 'Pending - قيد المراجعة';
-      return `<span class="badge ${cls}">${label}</span>`;
+    function showLogin() {
+      adminView.classList.add('hidden');
+      loginView.classList.remove('hidden');
+      adminPasswordInput.focus();
     }
 
-    function getTypeBadge(type) {
-      const value = type || 'add';
-      const cls = value === 'edit' ? 'type-edit' : 'type-add';
-      const label = value === 'edit' ? 'تعديل' : 'إضافة';
-      return `<span class="badge ${cls}">${label}</span>`;
+    function showAdmin() {
+      loginView.classList.add('hidden');
+      adminView.classList.remove('hidden');
     }
 
-    function esc(str) {
-      return String(str || '')
+    function setLoginMessage(message, type) {
+      loginMsg.textContent = message || '';
+      loginMsg.className = 'msg';
+
+      if (type) {
+        loginMsg.classList.add(type);
+      }
+    }
+
+    function showMessage(message, type) {
+      if (!message) {
+        messageBar.textContent = '';
+        messageBar.className = 'message-bar hidden';
+        return;
+      }
+
+      messageBar.textContent = message;
+      messageBar.className = `message-bar ${type || 'info'}`;
+    }
+
+    function esc(value) {
+      return String(value || '')
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;');
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function normalizeStatus(status) {
+      const value = String(status || 'pending').toLowerCase();
+
+      if (value === 'approved') return 'approved';
+      if (value === 'ignored') return 'ignored';
+      return 'pending';
+    }
+
+    function normalizeType(type) {
+      const value = String(type || 'add').toLowerCase();
+      return value === 'edit' ? 'edit' : 'add';
+    }
+
+    function getStatusBadge(status) {
+      const value = normalizeStatus(status);
+      const meta = STATUS_META[value] || STATUS_META.pending;
+
+      return `<span class="badge ${meta.className}">${esc(meta.label)}</span>`;
+    }
+
+    function getTypeBadge(type) {
+      const value = normalizeType(type);
+      const meta = TYPE_META[value] || TYPE_META.add;
+
+      return `<span class="badge ${meta.className}">${esc(meta.label)}</span>`;
+    }
+
+    function formatDate(value) {
+      if (!value) return '-';
+
+      const date = new Date(value);
+
+      if (Number.isNaN(date.getTime())) {
+        return value;
+      }
+
+      return new Intl.DateTimeFormat('ar-EG', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      }).format(date);
+    }
+
+    function getPhones(item) {
+      return [item.phone1, item.phone2, item.phone3]
+        .map(phone => String(phone || '').trim())
+        .filter(Boolean);
+    }
+
+    function getDoctorInitial(name) {
+      const value = String(name || '').trim();
+
+      if (!value) {
+        return 'د';
+      }
+
+      if (value.indexOf('.') !== -1 && value[value.indexOf('.') + 1]) {
+        return value[value.indexOf('.') + 1].trim() || 'د';
+      }
+
+      return value.charAt(0);
+    }
+
+    function getPhoneHtml(item) {
+      const phones = getPhones(item);
+
+      if (!phones.length) {
+        return '<span class="detail-value">-</span>';
+      }
+
+      const phoneItems = phones.map(phone => {
+        return `<span class="phone-pill">${esc(phone)}</span>`;
+      }).join('');
+
+      return `<div class="phones-list">${phoneItems}</div>`;
+    }
+
+    function requestMatches(item) {
+      const selectedStatus = statusFilter.value;
+      const selectedType = typeFilter.value;
+      const query = searchInput.value.trim().toLowerCase();
+      const itemStatus = normalizeStatus(item.status);
+      const itemType = normalizeType(item.request_type);
+
+      const statusOk = selectedStatus === 'all' || itemStatus === selectedStatus;
+      const typeOk = selectedType === 'all' || itemType === selectedType;
+
+      const haystack = [
+        item.doctor_name,
+        item.name,
+        item.specialty,
+        item.phone1,
+        item.phone2,
+        item.phone3,
+        item.address,
+        item.subtitle,
+        item.services,
+        item.slug
+      ].join(' ').toLowerCase();
+
+      const searchOk = !query || haystack.includes(query);
+
+      return statusOk && typeOk && searchOk;
+    }
+
+    function renderCounts() {
+      const pending = allRequests.filter(item => normalizeStatus(item.status) === 'pending').length;
+      const approved = allRequests.filter(item => normalizeStatus(item.status) === 'approved').length;
+      const ignored = allRequests.filter(item => normalizeStatus(item.status) === 'ignored').length;
+
+      countAll.textContent = allRequests.length;
+      countPending.textContent = pending;
+      countApproved.textContent = approved;
+      countIgnored.textContent = ignored;
+    }
+
+    function renderLoading() {
+      emptyState.classList.add('hidden');
+      requestsGrid.innerHTML = `
+        <div class="loading-card">
+          <div class="loading-spinner"></div>
+          <div class="empty-title">جارٍ تحميل الطلبات</div>
+          <div class="empty-text">يتم الاتصال بالـ Worker الآن.</div>
+        </div>
+      `;
+    }
+
+    function renderEmpty() {
+      requestsGrid.innerHTML = '';
+      emptyState.classList.remove('hidden');
+    }
+
+    function renderRequestCard(item) {
+      const requestId = item.id || '';
+      const doctorName = item.doctor_name || item.name || 'بدون اسم';
+      const specialty = item.specialty || 'بدون تخصص';
+      const address = item.address || '-';
+      const subtitle = item.subtitle || '-';
+      const services = item.services || '-';
+      const hours = item.hours || '-';
+      const gender = item.gender || '-';
+      const slug = item.slug || '-';
+      const notes = item.notes || '';
+      const createdAt = formatDate(item.created_at);
+      const status = normalizeStatus(item.status);
+      const type = normalizeType(item.request_type);
+      const imageHtml = item.image
+        ? `<img src="${esc(item.image)}" alt="${esc(doctorName)}">`
+        : `<span>${esc(getDoctorInitial(doctorName))}</span>`;
+      const notesHtml = notes
+        ? `<div class="notes-box">
+            <strong>ملاحظات:</strong><br>
+            ${esc(notes)}
+          </div>`
+        : '';
+
+      return `
+        <article class="request-card" data-request-status="${esc(status)}" data-request-type="${esc(type)}">
+          <div class="request-top">
+            <div class="request-main">
+              <div class="doctor-avatar">${imageHtml}</div>
+              <div>
+                <h2 class="doctor-name">${esc(doctorName)}</h2>
+                <div class="doctor-meta">${esc(specialty)} - ${esc(createdAt)}</div>
+              </div>
+            </div>
+
+            <div class="badges">
+              ${getStatusBadge(status)}
+              ${getTypeBadge(type)}
+            </div>
+          </div>
+
+          <div class="request-body">
+            <div class="details-grid">
+              <div class="detail-item">
+                <div class="detail-label">التخصص</div>
+                <div class="detail-value">${esc(specialty)}</div>
+              </div>
+
+              <div class="detail-item">
+                <div class="detail-label">الحالة</div>
+                <div class="detail-value">${esc(STATUS_META[status].label)}</div>
+              </div>
+
+              <div class="detail-item full">
+                <div class="detail-label">العنوان</div>
+                <div class="detail-value">${esc(address)}</div>
+              </div>
+
+              <div class="detail-item full">
+                <div class="detail-label">الأرقام</div>
+                ${getPhoneHtml(item)}
+              </div>
+
+              <div class="detail-item">
+                <div class="detail-label">الوصف المختصر</div>
+                <div class="detail-value">${esc(subtitle)}</div>
+              </div>
+
+              <div class="detail-item">
+                <div class="detail-label">المواعيد</div>
+                <div class="detail-value">${esc(hours)}</div>
+              </div>
+
+              <div class="detail-item">
+                <div class="detail-label">النوع</div>
+                <div class="detail-value">${esc(gender)}</div>
+              </div>
+
+              <div class="detail-item">
+                <div class="detail-label">Slug</div>
+                <div class="detail-value">${esc(slug)}</div>
+              </div>
+
+              <div class="detail-item full">
+                <div class="detail-label">الخدمات</div>
+                <div class="detail-value">${esc(services)}</div>
+              </div>
+            </div>
+
+            ${notesHtml}
+
+            <div class="card-actions">
+              <button class="btn btn-success" type="button" data-status-action="approved" data-request-id="${esc(requestId)}">Approve</button>
+              <button class="btn btn-danger" type="button" data-status-action="ignored" data-request-id="${esc(requestId)}">Ignore</button>
+              <button class="btn btn-warning" type="button" data-status-action="pending" data-request-id="${esc(requestId)}">Pending</button>
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderRequests() {
+      renderCounts();
+
+      if (loadingRequests) {
+        renderLoading();
+        return;
+      }
+
+      const filteredRequests = allRequests.filter(requestMatches);
+
+      if (!filteredRequests.length) {
+        renderEmpty();
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+      requestsGrid.innerHTML = filteredRequests.map(renderRequestCard).join('');
+    }
+
+    function parseRequestsPayload(payload) {
+      if (Array.isArray(payload)) {
+        return payload;
+      }
+
+      if (payload && Array.isArray(payload.requests)) {
+        return payload.requests;
+      }
+
+      if (payload && Array.isArray(payload.data)) {
+        return payload.data;
+      }
+
+      return [];
+    }
+
+    async function readJsonResponse(res) {
+      const text = await res.text();
+
+      if (!text) {
+        return null;
+      }
+
+      try {
+        return JSON.parse(text);
+      } catch (err) {
+        return text;
+      }
     }
 
     async function getWorkerErrorMessage(res) {
@@ -432,247 +1377,216 @@
         return 'هذا الطبيب أو رقم الهاتف موجود بالفعل';
       }
 
-      return message || 'حصل خطأ أثناء تحديث الحالة';
-    }
-
-    function requestMatches(item) {
-      const statusValue = statusFilter.value;
-      const typeValue = typeFilter.value;
-      const q = searchInput.value.trim().toLowerCase();
-
-      const statusOk = statusValue === 'all' || (item.status || 'pending') === statusValue;
-      const typeOk = typeValue === 'all' || (item.request_type || 'add') === typeValue;
-
-      const haystack = [
-        item.doctor_name,
-        item.specialty,
-        item.phone1,
-        item.phone2,
-        item.phone3,
-        item.address,
-        item.subtitle
-      ].join(' ').toLowerCase();
-
-      const searchOk = !q || haystack.includes(q);
-
-      return statusOk && typeOk && searchOk;
-    }
-
-    function renderCounts() {
-      countAll.textContent = allRequests.length;
-      countPending.textContent = allRequests.filter(r => (r.status || 'pending') === 'pending').length;
-      countApproved.textContent = allRequests.filter(r => (r.status || 'pending') === 'approved').length;
-      countIgnored.textContent = allRequests.filter(r => (r.status || 'pending') === 'ignored').length;
-    }
-
-    function renderRequests() {
-      renderCounts();
-
-      const filtered = allRequests.filter(requestMatches);
-
-      if (!filtered.length) {
-        requestsGrid.innerHTML = '';
-        emptyState.classList.remove('hidden');
-        return;
-      }
-
-      emptyState.classList.add('hidden');
-
-      requestsGrid.innerHTML = filtered.map(item => {
-        const imageHtml = item.image
-          ? `<img src="${esc(item.image)}" alt="${esc(item.doctor_name)}">`
-          : `<span>${esc((item.doctor_name || 'د').charAt(0))}</span>`;
-        const notesHtml = item.notes
-          ? `<div class="notes-box">
-              <strong>ملاحظات:</strong><br>
-              ${esc(item.notes)}
-            </div>`
-          : '';
-
-        return `
-          <div class="request-card">
-            <div class="card-head">
-              <div>
-                <h3 class="doctor-name">${esc(item.doctor_name || 'بدون اسم')}</h3>
-                <div class="card-subtitle">
-                  ${esc(item.specialty || 'بدون تخصص')} • ${esc(item.created_at || '')}
-                </div>
-              </div>
-              <div class="badges">
-                ${getStatusBadge(item.status)}
-                ${getTypeBadge(item.request_type)}
-              </div>
-            </div>
-
-            <div class="card-body">
-              <div class="doctor-image">${imageHtml}</div>
-
-              <div>
-                <div class="details">
-                  <div class="detail-item">
-                    <div class="detail-label">الوصف المختصر</div>
-                    <div class="detail-value">${esc(item.subtitle || '-')}</div>
-                  </div>
-                  <div class="detail-item">
-                    <div class="detail-label">العنوان</div>
-                    <div class="detail-value">${esc(item.address || '-')}</div>
-                  </div>
-                  <div class="detail-item">
-                    <div class="detail-label">رقم 1</div>
-                    <div class="detail-value">${esc(item.phone1 || '-')}</div>
-                  </div>
-                  <div class="detail-item">
-                    <div class="detail-label">رقم 2</div>
-                    <div class="detail-value">${esc(item.phone2 || '-')}</div>
-                  </div>
-                  <div class="detail-item">
-                    <div class="detail-label">رقم 3</div>
-                    <div class="detail-value">${esc(item.phone3 || '-')}</div>
-                  </div>
-                  <div class="detail-item">
-                    <div class="detail-label">المواعيد</div>
-                    <div class="detail-value">${esc(item.hours || '-')}</div>
-                  </div>
-                  <div class="detail-item">
-                    <div class="detail-label">الخدمات</div>
-                    <div class="detail-value">${esc(item.services || '-')}</div>
-                  </div>
-                  <div class="detail-item">
-                    <div class="detail-label">النوع</div>
-                    <div class="detail-value">${esc(item.gender || '-')}</div>
-                  </div>
-                  <div class="detail-item">
-                    <div class="detail-label">Slug</div>
-                    <div class="detail-value">${esc(item.slug || '-')}</div>
-                  </div>
-                  <div class="detail-item">
-                    <div class="detail-label">الحالة الحالية</div>
-                    <div class="detail-value">${esc(item.status || 'pending')}</div>
-                  </div>
-                </div>
-
-                ${notesHtml}
-
-                <div class="card-actions">
-                  <button class="btn btn-primary" onclick="updateRequestStatus('${item.id}', 'approved')">Approve</button>
-                  <button class="btn btn-danger" onclick="updateRequestStatus('${item.id}', 'ignored')">Ignore</button>
-                  <button class="btn btn-warning" onclick="updateRequestStatus('${item.id}', 'pending')">رجّع Pending</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        `;
-      }).join('');
+      return message || 'حصل خطأ أثناء تنفيذ العملية';
     }
 
     async function fetchRequests() {
       const password = getSavedPassword();
-      if (!password) return;
 
-      requestsGrid.innerHTML = '<div class="panel">جارٍ تحميل الطلبات...</div>';
-
-      const res = await fetch(`${WORKER_BASE_URL}/requests`, {
-        method: 'GET',
-        headers: {
-          'x-admin-password': password
-        }
-      });
-
-      if (res.status === 401) {
-        clearPassword();
-        adminView.classList.add('hidden');
-        loginView.classList.remove('hidden');
-        loginMsg.style.color = '#dc2626';
-        loginMsg.textContent = 'كلمة السر غير صحيحة.';
+      if (!password) {
+        showLogin();
         return;
       }
 
-      allRequests = await res.json();
+      loadingRequests = true;
+      showMessage('', '');
       renderRequests();
+
+      try {
+        const res = await fetch(`${WORKER_BASE_URL}/requests`, {
+          method: 'GET',
+          headers: {
+            'x-admin-password': password
+          }
+        });
+
+        if (res.status === 401) {
+          clearPassword();
+          allRequests = [];
+          loadingRequests = false;
+          renderRequests();
+          showLogin();
+          setLoginMessage('كلمة السر غير صحيحة.', 'error');
+          return;
+        }
+
+        if (!res.ok) {
+          const message = await getWorkerErrorMessage(res);
+          throw new Error(message);
+        }
+
+        const payload = await readJsonResponse(res);
+        allRequests = parseRequestsPayload(payload);
+        loadingRequests = false;
+        renderRequests();
+        showMessage('تم تحميل الطلبات بنجاح.', 'success');
+      } catch (err) {
+        loadingRequests = false;
+        requestsGrid.innerHTML = '';
+        emptyState.classList.add('hidden');
+        renderCounts();
+        showMessage(err.message || 'تعذر تحميل الطلبات.', 'error');
+      }
     }
 
     async function login() {
       const password = adminPasswordInput.value.trim();
+
       if (!password) {
-        loginMsg.style.color = '#dc2626';
-        loginMsg.textContent = 'اكتب كلمة السر.';
+        setLoginMessage('اكتب كلمة السر أولًا.', 'error');
         return;
       }
 
       loginBtn.disabled = true;
-      loginMsg.textContent = 'جارٍ التحقق...';
+      setLoginMessage('جارٍ التحقق من كلمة السر...', '');
 
-      const res = await fetch(`${WORKER_BASE_URL}/requests`, {
-        method: 'GET',
-        headers: {
-          'x-admin-password': password
+      try {
+        const res = await fetch(`${WORKER_BASE_URL}/requests`, {
+          method: 'GET',
+          headers: {
+            'x-admin-password': password
+          }
+        });
+
+        if (res.status === 401) {
+          setLoginMessage('كلمة السر غير صحيحة.', 'error');
+          return;
         }
-      });
 
-      if (res.status === 401) {
-        loginMsg.style.color = '#dc2626';
-        loginMsg.textContent = 'كلمة السر غير صحيحة.';
+        if (!res.ok) {
+          const message = await getWorkerErrorMessage(res);
+          throw new Error(message);
+        }
+
+        const payload = await readJsonResponse(res);
+        allRequests = parseRequestsPayload(payload);
+        savePassword(password);
+        showAdmin();
+        setLoginMessage('', '');
+        showMessage('تم تسجيل الدخول وتحميل الطلبات.', 'success');
+        renderRequests();
+      } catch (err) {
+        setLoginMessage(err.message || 'تعذر تسجيل الدخول.', 'error');
+      } finally {
         loginBtn.disabled = false;
-        return;
       }
+    }
 
-      savePassword(password);
-      loginView.classList.add('hidden');
-      adminView.classList.remove('hidden');
-
-      allRequests = await res.json();
-      renderRequests();
-
-      loginBtn.disabled = false;
-      loginMsg.textContent = '';
+    function getStatusLabel(status) {
+      const value = normalizeStatus(status);
+      return STATUS_META[value].label;
     }
 
     async function updateRequestStatus(id, status) {
       const password = getSavedPassword();
-      if (!password) return;
 
-      const ok = confirm(`هل أنت متأكد أنك تريد تغيير الحالة إلى: ${status} ؟`);
-      if (!ok) return;
-
-      const res = await fetch(`${WORKER_BASE_URL}/update-status`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-admin-password': password
-        },
-        body: JSON.stringify({ id, status })
-      });
-
-      if (!res.ok) {
-        const message = await getWorkerErrorMessage(res);
-        alert(message);
+      if (!password) {
+        showLogin();
         return;
       }
 
-      await fetchRequests();
+      if (!id) {
+        showMessage('لا يمكن تحديث طلب بدون ID.', 'error');
+        return;
+      }
+
+      const label = getStatusLabel(status);
+      const ok = confirm(`هل أنت متأكد من تغيير حالة الطلب إلى ${label}؟`);
+
+      if (!ok) {
+        return;
+      }
+
+      showMessage('جارٍ تحديث حالة الطلب...', 'info');
+
+      try {
+        const res = await fetch(`${WORKER_BASE_URL}/update-status`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-admin-password': password
+          },
+          body: JSON.stringify({
+            id: id,
+            status: status
+          })
+        });
+
+        if (res.status === 401) {
+          clearPassword();
+          showLogin();
+          setLoginMessage('انتهت الجلسة أو كلمة السر غير صحيحة.', 'error');
+          return;
+        }
+
+        if (!res.ok) {
+          const message = await getWorkerErrorMessage(res);
+          alert(message);
+          showMessage(message, 'error');
+          return;
+        }
+
+        showMessage('تم تحديث الحالة بنجاح.', 'success');
+        await fetchRequests();
+      } catch (err) {
+        const message = err.message || 'حصل خطأ أثناء تحديث الحالة';
+        alert(message);
+        showMessage(message, 'error');
+      }
     }
 
-    window.updateRequestStatus = updateRequestStatus;
+    function resetFilters() {
+      statusFilter.value = 'all';
+      typeFilter.value = 'all';
+      searchInput.value = '';
+      renderRequests();
+    }
 
-    loginBtn.addEventListener('click', login);
-    refreshBtn.addEventListener('click', fetchRequests);
-    logoutBtn.addEventListener('click', function() {
+    function logout() {
       clearPassword();
-      adminView.classList.add('hidden');
-      loginView.classList.remove('hidden');
+      allRequests = [];
+      renderCounts();
+      requestsGrid.innerHTML = '';
+      emptyState.classList.add('hidden');
+      showMessage('', '');
       adminPasswordInput.value = '';
+      showLogin();
+    }
+
+    requestsGrid.addEventListener('click', function(event) {
+      const button = event.target.closest('[data-status-action]');
+
+      if (!button) {
+        return;
+      }
+
+      updateRequestStatus(button.dataset.requestId, button.dataset.statusAction);
     });
 
+    loginBtn.addEventListener('click', login);
+
+    adminPasswordInput.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        login();
+      }
+    });
+
+    refreshBtn.addEventListener('click', fetchRequests);
+    logoutBtn.addEventListener('click', logout);
+    resetFiltersBtn.addEventListener('click', resetFilters);
+    applyFiltersBtn.addEventListener('click', renderRequests);
     statusFilter.addEventListener('change', renderRequests);
     typeFilter.addEventListener('change', renderRequests);
     searchInput.addEventListener('input', renderRequests);
 
-    (function init() {
-      const password = getSavedPassword();
-      if (password) {
-        loginView.classList.add('hidden');
-        adminView.classList.remove('hidden');
+    (function initAdminPage() {
+      renderCounts();
+
+      if (getSavedPassword()) {
+        showAdmin();
         fetchRequests();
+      } else {
+        showLogin();
       }
     })();
   </script>
